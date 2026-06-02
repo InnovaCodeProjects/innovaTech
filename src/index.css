@@ -391,30 +391,7 @@ section {
   display: inline-flex;
   align-items: center;
   flex-shrink: 0;
-}
-.client2 .cn {
-  font-family: var(--font-display);
-  font-weight: 600;
-  font-size: 1.6rem;
-  letter-spacing: -0.015em;
-  color: var(--text-3);
-  padding: 0 30px;
-  transition: color 0.3s var(--ease);
-  white-space: nowrap;
-}
-.client2:hover .cn {
-  color: var(--text);
-}
-.client2 .sep {
-  width: 13px;
-  height: 13px;
-  opacity: 0.55;
-  flex-shrink: 0;
-}
-.client2 .sep svg {
-  width: 100%;
-  height: 100%;
-  display: block;
+  padding: 0 48px;
 }
 
 /* ---------- Services — editorial index ---------- */
@@ -551,26 +528,27 @@ section {
 .pf.span4 {
   grid-column: span 4;
 }
+.pf.span3 {
+  grid-column: span 3;
+}
 .pf.span2 {
   grid-column: span 2;
 }
 .pf-thumb {
   position: relative;
-  aspect-ratio: 16/10;
-  background: repeating-linear-gradient(
-    135deg,
-    var(--surface-2) 0,
-    var(--surface-2) 11px,
-    transparent 11px,
-    transparent 22px
-  );
+  flex: 1;
+  min-height: 200px;
+  background: var(--bg-2);
   border-bottom: 1px solid var(--line);
   display: grid;
   place-items: center;
   overflow: hidden;
 }
 .pf.span4 .pf-thumb {
-  aspect-ratio: 16/8.5;
+  min-height: 380px;
+}
+.pf.span3 .pf-thumb {
+  min-height: 260px;
 }
 .pf-thumb .ph-tag {
   font-family: var(--font-mono);
@@ -587,22 +565,24 @@ section {
   position: absolute;
   top: 14px;
   left: 14px;
+  z-index: 2;
   font-family: var(--font-mono);
   font-size: 0.66rem;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--accent);
-  background: rgba(10, 10, 15, 0.7);
+  background: rgba(10, 10, 15, 0.82);
   border: 1px solid var(--accent-line);
   padding: 5px 10px;
   border-radius: 7px;
+  backdrop-filter: blur(4px);
 }
 .pf-body {
   padding: 22px 24px;
   display: flex;
   flex-direction: column;
   gap: 8px;
-  flex: 1;
+  flex: 0 0 auto;
 }
 .pf-body h3 {
   font-family: var(--font-display);
@@ -615,7 +595,6 @@ section {
   font-size: 0.9rem;
 }
 .pf-meta {
-  margin-top: auto;
   padding-top: 14px;
   display: flex;
   gap: 8px;
@@ -633,10 +612,11 @@ section {
   position: absolute;
   top: 14px;
   right: 14px;
+  z-index: 2;
   width: 34px;
   height: 34px;
   border-radius: 9px;
-  background: rgba(10, 10, 15, 0.7);
+  background: rgba(10, 10, 15, 0.82);
   border: 1px solid var(--line-2);
   display: grid;
   place-items: center;
@@ -644,6 +624,7 @@ section {
   opacity: 0;
   transform: translateY(-6px);
   transition: 0.3s var(--ease);
+  backdrop-filter: blur(4px);
 }
 .pf:hover .pf-arrow {
   opacity: 1;
@@ -654,6 +635,7 @@ section {
 .pf-thumb img {
   position: absolute; inset: 0; width: 100%; height: 100%;
   object-fit: cover; object-position: top center;
+  z-index: 1;
   transition: transform 0.45s var(--ease);
 }
 .pf:hover .pf-thumb img { transform: scale(1.04); }
@@ -2015,6 +1997,9 @@ section {
   .pf.span4 {
     grid-column: span 4;
   }
+  .pf.span3 {
+    grid-column: span 2;
+  }
   .pf.span2 {
     grid-column: span 2;
   }
@@ -2098,6 +2083,7 @@ section {
     grid-template-columns: 1fr;
   }
   .pf.span4,
+  .pf.span3,
   .pf.span2 {
     grid-column: span 1;
   }

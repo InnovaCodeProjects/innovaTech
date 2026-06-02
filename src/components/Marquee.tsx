@@ -10,16 +10,6 @@ const CLIENTS = [
   { src: leoLogo, alt: "Leo's Tereré" },
 ]
 
-function ArrowSep() {
-  return (
-    <span className="sep">
-      <svg viewBox="0 0 24 24">
-        <polygon points="12 3 21 21 12 16.5 3 21" fill="var(--accent)" />
-      </svg>
-    </span>
-  )
-}
-
 export default function Marquee() {
   const doubled = [...CLIENTS, ...CLIENTS]
 
@@ -32,7 +22,6 @@ export default function Marquee() {
         <div className="marquee-track">
           {doubled.map((client, i) => (
             <span key={i} className="client2">
-              <ArrowSep />
               <img className="client-logo" src={client.src} alt={client.alt} />
             </span>
           ))}
