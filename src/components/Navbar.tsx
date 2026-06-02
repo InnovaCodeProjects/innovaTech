@@ -1,112 +1,78 @@
-import { useState, useEffect } from "react";
-import { Menu, X } from "lucide-react";
-import logoImg from "../../assets/Logo2.png";
-
-const navLinks = [
-  { href: "#servicos", label: "Serviços" },
-  { href: "#precos", label: "Preços" },
-  { href: "#diferenciais", label: "Diferenciais" },
-  { href: "#contato", label: "Contato" },
-];
-
-const WA_NUMBER = "55914998040306";
+import { useState, useEffect } from 'react'
 
 export default function Navbar() {
-  const [scrolled, setScrolled] = useState(false);
-  const [menuOpen, setMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false)
+  const [menuOpen, setMenuOpen] = useState(false)
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 30);
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+    const onScroll = () => setScrolled(window.scrollY > 24)
+    window.addEventListener('scroll', onScroll, { passive: true })
+    onScroll()
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [])
+
+  useEffect(() => {
+    document.body.style.overflow = menuOpen ? 'hidden' : ''
+    return () => { document.body.style.overflow = '' }
+  }, [menuOpen])
+
+  const close = () => setMenuOpen(false)
 
   return (
-    <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled ? "glass border-b border-white/5 py-3" : "py-5 bg-transparent"
-      }`}
-    >
-      <nav className="max-w-7xl mx-auto px-6 flex items-center justify-between">
-        {/* Logo */}
+    <>
+      <header className={`nav${scrolled ? ' scrolled' : ''}`} id="nav">
+        <div className="wrap nav-inner">
+          <a href="#topo" className="brand" aria-label="Innova Tech">
+            <span className="mark"><img src="/mark-white.png" alt="" /></span>
+            <span className="name">INNOVA<b>TECH</b></span>
+          </a>
+
+          <nav className="nav-links">
+            <a href="#servicos">Serviços</a>
+            <a href="#atendimento">Atendimento</a>
+            <a href="#portfolio">Projetos</a>
+            <a href="#software">Software</a>
+            <a href="#planos">Planos</a>
+          </nav>
+
+          <div className="nav-cta">
+            <a
+              className="btn btn-primary"
+              href="https://wa.me/5514998040306?text=Ol%C3%A1!%20Gostaria%20de%20um%20or%C3%A7amento%20gratuito."
+              target="_blank"
+              rel="noopener"
+            >
+              Orçamento grátis
+            </a>
+            <button
+              className="burger"
+              aria-label={menuOpen ? 'Fechar menu' : 'Abrir menu'}
+              onClick={() => setMenuOpen((o) => !o)}
+            >
+              <i className={menuOpen ? 'bi bi-x-lg' : 'bi bi-list'} />
+            </button>
+          </div>
+        </div>
+      </header>
+
+      <div className={`mobile-menu${menuOpen ? ' open' : ''}`} id="mobileMenu">
+        <a href="#servicos" onClick={close}><span className="mi">01</span>Serviços</a>
+        <a href="#atendimento" onClick={close}><span className="mi">02</span>Atendimento</a>
+        <a href="#portfolio" onClick={close}><span className="mi">03</span>Projetos</a>
+        <a href="#software" onClick={close}><span className="mi">04</span>Software</a>
+        <a href="#processo" onClick={close}><span className="mi">05</span>Como trabalhamos</a>
+        <a href="#planos" onClick={close}><span className="mi">06</span>Planos</a>
         <a
-          href="#"
-          className="flex items-center gap-3 group"
-          aria-label="Innova Tech — página inicial"
+          className="btn btn-wa"
+          href="https://wa.me/5514998040306?text=Ol%C3%A1!%20Gostaria%20de%20um%20or%C3%A7amento."
+          target="_blank"
+          rel="noopener"
+          onClick={close}
         >
-          <img
-            src={logoImg}
-            alt="Innova Tech logo"
-            className="h-12 w-12 rounded-full transition-transform duration-300 group-hover:scale-105"
-          />
-          <span className="font-black text-base tracking-tight">
-            INNOVA<span className="text-blue-400">TECH</span>
-          </span>
+          <i className="bi bi-whatsapp" />
+          Falar no WhatsApp
         </a>
-
-        {/* Desktop nav */}
-        <ul className="hidden md:flex items-center gap-7" role="list">
-          {navLinks.map((link) => (
-            <li key={link.href}>
-              <a
-                href={link.href}
-                className="text-sm text-white/60 hover:text-white transition-colors duration-200 font-medium"
-              >
-                {link.label}
-              </a>
-            </li>
-          ))}
-        </ul>
-
-        {/* CTA desktop */}
-        <div className="hidden md:block">
-          <a
-            href={`https://wa.me/${WA_NUMBER}?text=Olá! Gostaria de solicitar um orçamento.`}
-            className="btn-primary !py-2.5 !px-6 !text-sm"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Orçamento Grátis
-          </a>
-        </div>
-
-        {/* Mobile toggle */}
-        <button
-          onClick={() => setMenuOpen(!menuOpen)}
-          className="md:hidden text-white p-2 -mr-2"
-          aria-label={menuOpen ? "Fechar menu" : "Abrir menu"}
-        >
-          {menuOpen ? <X size={22} /> : <Menu size={22} />}
-        </button>
-      </nav>
-
-      {/* Mobile menu */}
-      {menuOpen && (
-        <div className="md:hidden glass border-t border-white/5 px-6 pt-4 pb-6">
-          <ul className="flex flex-col gap-5 mb-6" role="list">
-            {navLinks.map((link) => (
-              <li key={link.href}>
-                <a
-                  href={link.href}
-                  onClick={() => setMenuOpen(false)}
-                  className="text-white/70 hover:text-white transition-colors font-medium text-base"
-                >
-                  {link.label}
-                </a>
-              </li>
-            ))}
-          </ul>
-          <a
-            href={`https://wa.me/${WA_NUMBER}?text=Olá! Gostaria de solicitar um orçamento.`}
-            className="btn-primary w-full !text-sm"
-            target="_blank"
-            rel="noopener noreferrer"
-            onClick={() => setMenuOpen(false)}
-          >
-            Orçamento Grátis
-          </a>
-        </div>
-      )}
-    </header>
-  );
+      </div>
+    </>
+  )
 }
