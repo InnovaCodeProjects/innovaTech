@@ -1,66 +1,36 @@
-import { Wrench, MonitorSmartphone, Network, Code2, ArrowRight } from 'lucide-react'
+import React from 'react'
 import { useReveal } from '../hooks/useReveal'
 
-const services = [
+const SERVICES = [
   {
-    icon: Wrench,
+    n: '01',
     title: 'Assistência Técnica',
-    description:
-      'Diagnóstico, reparo e manutenção de computadores e notebooks. Formatações, trocas de componentes, limpeza interna e upgrades de hardware com qualidade garantida.',
-    features: [
-      'Formatação e reinstalação do SO',
-      'Troca de HD, SSD, RAM',
-      'Limpeza interna e externa',
-      'Montagem completa de PCs',
-    ],
-    badge: 'Diagnóstico Grátis',
-    badgeColor: 'text-green-400 bg-green-400/8 border-green-400/20',
-    accentColor: '#3b82f6',
+    detail: 'Reparo · formatação · troca de HD/SSD/memória · upgrades · montagem completa de PCs',
+    href: 'https://wa.me/5514998040306?text=Ol%C3%A1!%20Preciso%20de%20assist%C3%AAncia%20t%C3%A9cnica.',
   },
   {
-    icon: MonitorSmartphone,
+    n: '02',
     title: 'Suporte Remoto',
-    description:
-      'Resolução ágil de problemas de software, vírus, configurações e instalações sem sair de casa. Atendimento especializado direto no seu dispositivo.',
-    features: [
-      'Remoção de vírus e malware',
-      'Instalação de programas',
-      'Configuração e otimização',
-      'Suporte a distância',
-    ],
-    badge: 'Atendimento Rápido',
-    badgeColor: 'text-blue-400 bg-blue-400/8 border-blue-400/20',
-    accentColor: '#2563eb',
+    detail: 'Remoção de vírus · instalação e otimização · configuração de sistemas · resolução à distância',
+    href: 'https://wa.me/5514998040306?text=Ol%C3%A1!%20Preciso%20de%20suporte%20remoto.',
   },
   {
-    icon: Network,
+    n: '03',
     title: 'Redes & Infraestrutura',
-    description:
-      'Projetos completos de redes corporativas e residenciais. Configuração avançada de MikroTik, firewall, controle de acesso e monitoramento em tempo real.',
-    features: [
-      'Configuração MikroTik',
-      'Firewall e VPN',
-      'Controle de banda e acesso',
-      'Monitoramento em tempo real',
-    ],
-    badge: 'Alta Performance',
-    badgeColor: 'text-purple-400 bg-purple-400/8 border-purple-400/20',
-    accentColor: '#7c3aed',
+    detail: 'MikroTik avançado · firewall e VPN · controle de banda e acesso · monitoramento 24/7',
+    href: 'https://wa.me/5514998040306?text=Ol%C3%A1!%20Quero%20um%20projeto%20de%20rede%2Finfraestrutura.',
   },
   {
-    icon: Code2,
+    n: '04',
     title: 'Desenvolvimento de Software',
-    description:
-      'Aplicações web, mobile e integrações personalizadas. Desenvolvemos com foco em performance, usabilidade e experiência do usuário, entregando valor real ao seu negócio.',
-    features: [
-      'Aplicações web e mobile',
-      'APIs e integrações',
-      'Sistemas personalizados',
-      'Design responsivo (UI/UX)',
-    ],
-    badge: 'Sob Medida',
-    badgeColor: 'text-orange-400 bg-orange-400/8 border-orange-400/20',
-    accentColor: '#ea580c',
+    detail: 'Aplicações web e mobile · APIs e integrações · sistemas personalizados · UI/UX responsivo',
+    href: 'https://wa.me/5514998040306?text=Ol%C3%A1!%20Quero%20desenvolver%20um%20software%2Fsistema.',
+  },
+  {
+    n: '05',
+    title: 'Design & Branding',
+    detail: 'Sites · apps · logos · identidade visual · materiais digitais · landing pages de alta conversão',
+    href: 'https://wa.me/5514998040306?text=Ol%C3%A1!%20Tenho%20interesse%20em%20servi%C3%A7os%20de%20design.',
   },
 ]
 
@@ -69,87 +39,33 @@ export default function Services() {
 
   return (
     <section
+      className="sec"
       id="servicos"
       ref={ref as React.RefObject<HTMLElement>}
-      className="py-24 lg:py-32 px-6"
-      aria-label="Serviços"
     >
-      <div className="max-w-7xl mx-auto">
-        {/* Header */}
-        <div className="text-center mb-16">
-          <p className="reveal section-label mb-4">O que fazemos</p>
-          <h2 className="reveal reveal-delay-1 text-4xl lg:text-5xl font-black tracking-tight mb-5">
-            Soluções completas em TI
-          </h2>
-          <p className="reveal reveal-delay-2 text-white/50 text-lg max-w-xl mx-auto leading-relaxed">
-            De hardware a software, da rede ao código — cobrimos toda a sua operação digital.
-          </p>
+      <div className="wrap">
+        <div className="idx-head reveal">
+          <div>
+            <span className="eyebrow"><span className="idx">01</span> O que movemos</span>
+            <h2 style={{ marginTop: 18 }}>Do hardware <span className="grad-text">ao código.</span></h2>
+          </div>
+          <p className="note">Cinco frentes, um único ponto de contato. Passe o mouse para abrir.</p>
         </div>
 
-        {/* Grid */}
-        <div className="grid md:grid-cols-2 gap-5">
-          {services.map((service, i) => {
-            const Icon = service.icon
-            return (
-              <article
-                key={service.title}
-                className={`reveal reveal-delay-${Math.min(i + 1, 4)} card-innova rounded-2xl p-8 group cursor-default`}
-              >
-                {/* Top row */}
-                <div className="flex items-start justify-between mb-6">
-                  <div
-                    className="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0"
-                    style={{ background: `${service.accentColor}15` }}
-                  >
-                    <Icon
-                      size={22}
-                      style={{ color: service.accentColor }}
-                    />
-                  </div>
-                  <span
-                    className={`text-[11px] font-bold px-3 py-1 rounded-full border ${service.badgeColor}`}
-                  >
-                    {service.badge}
-                  </span>
-                </div>
-
-                {/* Content */}
-                <h3 className="text-xl font-bold mb-3 tracking-tight">
-                  {service.title}
-                </h3>
-                <p className="text-white/50 text-sm leading-relaxed mb-6">
-                  {service.description}
-                </p>
-
-                {/* Features */}
-                <ul className="space-y-2 mb-8">
-                  {service.features.map((feat) => (
-                    <li key={feat} className="flex items-center gap-2.5 text-sm text-white/65">
-                      <span
-                        className="w-1.5 h-1.5 rounded-full flex-shrink-0"
-                        style={{ background: service.accentColor }}
-                      />
-                      {feat}
-                    </li>
-                  ))}
-                </ul>
-
-                {/* CTA link */}
-                <a
-                  href="#contato"
-                  className="inline-flex items-center gap-1.5 text-sm font-semibold transition-all duration-200"
-                  style={{ color: service.accentColor }}
-                >
-                  Solicitar serviço
-                  <ArrowRight
-                    size={14}
-                    className="transition-transform duration-200 group-hover:translate-x-1"
-                  />
-                </a>
-              </article>
-            )
-          })}
-        </div>
+        <ul className="index">
+          {SERVICES.map((s) => (
+            <li key={s.n} className="ix reveal">
+              <a href={s.href} target="_blank" rel="noopener">
+                <span className="ix-n">{s.n}</span>
+                <span className="ix-main">
+                  <span className="ix-title">{s.title}</span>
+                  <span className="ix-detail">{s.detail}</span>
+                </span>
+                <span className="ix-go"><i className="bi bi-arrow-up-right" /></span>
+              </a>
+            </li>
+          ))}
+        </ul>
       </div>
     </section>
   )

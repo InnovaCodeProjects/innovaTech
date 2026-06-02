@@ -1,143 +1,250 @@
-import { CheckCircle2, MessageCircle } from "lucide-react";
+import React, { useState, useEffect } from "react";
 import { useReveal } from "../hooks/useReveal";
 
-const WA_NUMBER = "5514998040306";
+const AVULSO = [
+  {
+    title: "Formatação & SO",
+    value: "R$ 80",
+    desc: "Formatação, instalação do sistema e antivírus. Versão avançada com backup: R$ 100.",
+    feat: false,
+    delay: "",
+  },
+  {
+    title: "Limpeza completa",
+    value: "R$ 150",
+    desc: "Limpeza física interna + formatação + backup completo. Mais pedido.",
+    feat: true,
+    delay: "d1",
+  },
+  {
+    title: "Montagem de PC",
+    value: "R$ 250",
+    desc: "Montagem dos componentes, instalação do SO e softwares básicos.",
+    feat: false,
+    delay: "d2",
+  },
+  {
+    title: "Rede & Software",
+    value: "Sob medida",
+    desc: "Projetos de infraestrutura e desenvolvimento conforme o escopo.",
+    feat: false,
+    delay: "d3",
+  },
+];
 
-const pricingItems = [
+const PLANS = [
   {
-    name: "Formatação Simples",
-    price: "R$ 80",
-    description:
-      "Formatação, instalação do SO, configuração de antivírus. Sem backup.",
-    highlight: false,
+    name: "Assinatura Essencial",
+    value: "R$ 200",
+    tag: "",
+    desc: "Ideal para consultórios, clínicas e pequenos estabelecimentos.",
+    items: [
+      "Suporte remoto ilimitado",
+      "Até 3 visitas técnicas por mês",
+      "Descontos progressivos em serviços",
+      "Peças e substituições orçadas à parte",
+    ],
+    extra: "Visita além das inclusas: R$ 50/visita",
+    feat: false,
+    delay: "",
   },
   {
-    name: "Formatação Avançada",
-    price: "R$ 100",
-    description:
-      "Formatação, SO, antivírus, navegadores, Adobe Reader, WinRAR. Com backup incluso.",
-    highlight: true,
+    name: "Assinatura Completa",
+    value: "R$ 420",
+    tag: "Mais contratado",
+    desc: "Para negócios com maior volume e necessidade de manutenção contínua.",
+    items: [
+      "Manutenção preventiva mensal",
+      "Manutenção corretiva inclusa",
+      "Até 4 visitas técnicas por mês",
+      "Suporte remoto ilimitado",
+      "20% de desconto em serviços adicionais",
+    ],
+    extra: "Visita além das inclusas: R$ 50/visita",
+    feat: true,
+    delay: "d1",
   },
-  {
-    name: "Troca de Componentes Simples",
-    price: "R$ 40",
-    description:
-      "Substituição de memória RAM, fonte de alimentação, HD, DVD, SSD e similares.",
-    highlight: false,
-  },
-  {
-    name: "Troca de Componentes Avançada",
-    price: "R$ 70",
-    description:
-      "Troca de placa-mãe, processador e cooler com configuração completa.",
-    highlight: false,
-  },
-  {
-    name: "Limpeza Simples",
-    price: "R$ 100",
-    description:
-      "Desmontagem completa, limpeza interna e remontagem cuidadosa.",
-    highlight: false,
-  },
-  {
-    name: "Limpeza Avançada",
-    price: "R$ 150",
-    description:
-      "Limpeza física interna e externa, formatação e backup completo.",
-    highlight: true,
-  },
-  {
-    name: "Montagem Completa de PC",
-    price: "R$ 250",
-    description:
-      "Montagem dos componentes, instalação de gabinete, SO e softwares básicos.",
-    highlight: false,
-  },
+];
+
+const DISCOUNTS = [
+  { range: "1 máquina", pct: "20%" },
+  { range: "2–5 máquinas", pct: "25%" },
+  { range: "6–9 máquinas", pct: "30%" },
+  { range: "10+ máquinas", pct: "60%" },
 ];
 
 export default function Pricing() {
   const ref = useReveal();
+  const [pdfOpen, setPdfOpen] = useState(false);
+
+  useEffect(() => {
+    if (!pdfOpen) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setPdfOpen(false);
+    };
+    window.addEventListener("keydown", onKey);
+    document.body.style.overflow = "hidden";
+    return () => {
+      window.removeEventListener("keydown", onKey);
+      document.body.style.overflow = "";
+    };
+  }, [pdfOpen]);
 
   return (
-    <section
-      id="precos"
-      ref={ref as React.RefObject<HTMLElement>}
-      className="py-24 lg:py-32 px-6"
-      aria-label="Tabela de preços"
-      style={{
-        background: "linear-gradient(to bottom, #050505, #080808, #050505)",
-      }}
-    >
-      <div className="max-w-7xl mx-auto">
-        {/* Header */}
-        <div className="text-center mb-4">
-          <p className="reveal section-label mb-4">Transparência total</p>
-          <h2 className="reveal reveal-delay-1 text-4xl lg:text-5xl font-black tracking-tight mb-5">
-            Tabela de serviços
-          </h2>
-          <p className="reveal reveal-delay-2 text-white/50 text-lg max-w-xl mx-auto leading-relaxed">
-            Preços claros e sem surpresas. Diagnóstico sempre gratuito.
-          </p>
-        </div>
-
-        {/* Free diagnosis banner */}
-        <div className="reveal reveal-delay-3 my-10 flex items-center justify-center">
-          <div className="inline-flex items-center gap-3 px-6 py-3.5 rounded-full border border-green-500/25 bg-green-500/6">
-            <CheckCircle2 size={16} className="text-green-400" />
-            <span className="text-green-300 font-semibold text-sm">
-              Orçamento 100% gratuito — sem compromisso
+    <>
+      <section
+        className="sec"
+        id="planos"
+        ref={ref as React.RefObject<HTMLElement>}
+      >
+        <div className="wrap">
+          <div
+            className="section-head reveal"
+            style={{
+              marginLeft: "auto",
+              marginRight: "auto",
+              textAlign: "center",
+            }}
+          >
+            <span className="eyebrow" style={{ justifyContent: "center" }}>
+              <span className="idx">07</span> Transparência total
             </span>
+            <h2>
+              Preços claros, <span className="grad-text">sem surpresas.</span>
+            </h2>
+            <p style={{ marginLeft: "auto", marginRight: "auto" }}>
+              Serviços avulsos com valor de referência ou plano de T.I. para
+              quem quer suporte contínuo.
+            </p>
+          </div>
+
+          <div className="plans-divider reveal">
+            Planos de T.I. — Serviços Avulsos
+          </div>
+
+          <div className="price-banner reveal">
+            <i className="bi bi-check-circle" />
+            Diagnóstico 100% gratuito — sem compromisso
+          </div>
+
+          <div className="price-grid">
+            {AVULSO.map((p) => (
+              <div
+                key={p.title}
+                className={`price${p.feat ? " feat" : ""} reveal${p.delay ? " " + p.delay : ""}`}
+              >
+                <div className="pt">
+                  <h4>{p.title}</h4>
+                  <span className="pv">{p.value}</span>
+                </div>
+                <p>{p.desc}</p>
+              </div>
+            ))}
+          </div>
+
+          <div
+            style={{ textAlign: "center", marginTop: "20px" }}
+            className="reveal"
+          >
+            <button
+              className="price-catalog-btn"
+              onClick={() => setPdfOpen(true)}
+            >
+              <i className="bi bi-file-earmark-pdf" />
+              Ver tabela completa de preços
+            </button>
+          </div>
+
+          <p className="price-note">
+            * Valores de peças e componentes cobrados à parte. Preços de
+            referência, sujeitos a alteração conforme o diagnóstico.
+          </p>
+
+          <div className="plans-divider reveal">
+            Planos de T.I. — Assinatura Mensal
+          </div>
+
+          <p className="plan-intro reveal">
+            Suporte contínuo, visitas técnicas e descontos progressivos conforme
+            o tamanho do seu negócio. Quanto mais equipamentos, maior a
+            economia.
+          </p>
+
+          <div className="plan-grid">
+            {PLANS.map((plan) => (
+              <div
+                key={plan.name}
+                className={`plan-card${plan.feat ? " feat" : ""} reveal${plan.delay ? " " + plan.delay : ""}`}
+              >
+                <div className="plan-card-top">
+                  <span className="plan-name">{plan.name}</span>
+                  {plan.tag && <span className="plan-tag">{plan.tag}</span>}
+                </div>
+                <div className="plan-val">
+                  {plan.value}
+                  <span>/mês</span>
+                </div>
+                <p className="plan-desc">{plan.desc}</p>
+                <ul className="plan-items">
+                  {plan.items.map((item) => (
+                    <li key={item}>{item}</li>
+                  ))}
+                </ul>
+                <div className="plan-extra">{plan.extra}</div>
+              </div>
+            ))}
+          </div>
+
+          <p className="disc-head reveal">
+            Benefício de assinatura — desconto em serviços adicionais
+          </p>
+          <div className="disc-table reveal">
+            {DISCOUNTS.map((d) => (
+              <div key={d.range} className="disc-item">
+                <div className="di-pct">{d.pct}</div>
+                <div className="di-range">{d.range}</div>
+              </div>
+            ))}
+          </div>
+          <p className="disc-note reveal">
+            Você só paga pelos serviços que utilizar. O desconto é aplicado
+            automaticamente conforme a quantidade de equipamentos.
+          </p>
+
+          <div className="price-cta reveal">
+            <a
+              className="btn btn-wa"
+              href="https://wa.me/5514998040306?text=Ol%C3%A1!%20Vi%20a%20tabela%20e%20gostaria%20de%20um%20or%C3%A7amento."
+              target="_blank"
+              rel="noopener"
+            >
+              <i className="bi bi-whatsapp" />
+              Solicitar orçamento via WhatsApp
+            </a>
           </div>
         </div>
+      </section>
 
-        {/* Grid */}
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
-          {pricingItems.map((item, i) => (
-            <div
-              key={item.name}
-              className={`reveal reveal-delay-${Math.min((i % 3) + 1, 4)} relative rounded-2xl p-6 transition-all duration-300 ${
-                item.highlight
-                  ? "border border-blue-500/35 bg-blue-950/15"
-                  : "card-innova"
-              }`}
-            >
-              {item.highlight && (
-                <span className="absolute -top-3 left-6 bg-blue-600 text-white text-[11px] font-bold px-3 py-1 rounded-full">
-                  Popular
-                </span>
-              )}
-              <div className="flex items-start justify-between gap-4 mb-3">
-                <h3 className="font-bold text-base leading-snug">
-                  {item.name}
-                </h3>
-                <span className="text-blue-400 font-black text-lg flex-shrink-0">
-                  {item.price}
-                </span>
-              </div>
-              <p className="text-white/45 text-sm leading-relaxed">
-                {item.description}
-              </p>
+      {pdfOpen && (
+        <div className="pdf-modal" onClick={() => setPdfOpen(false)}>
+          <div className="pdf-modal-inner" onClick={(e) => e.stopPropagation()}>
+            <div className="pdf-modal-bar">
+              <span>Tabela de Preços — Innova Tech</span>
+              <button
+                className="pdf-modal-close"
+                onClick={() => setPdfOpen(false)}
+                aria-label="Fechar"
+              >
+                <i className="bi bi-x-lg" />
+              </button>
             </div>
-          ))}
+            <iframe
+              src="/tabela-innova.pdf"
+              title="Tabela de Preços Innova Tech"
+            />
+          </div>
         </div>
-
-        {/* Note + CTA */}
-        <div className="reveal text-center">
-          <p className="text-white/35 text-sm mb-8">
-            * Valores de peças e componentes cobrados à parte. Preços sujeitos a
-            alteração.
-          </p>
-          <a
-            href={`https://wa.me/${WA_NUMBER}?text=Olá! Vi a tabela de serviços e gostaria de um orçamento.`}
-            className="btn-primary"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <MessageCircle size={16} />
-            Solicitar via WhatsApp
-          </a>
-        </div>
-      </div>
-    </section>
+      )}
+    </>
   );
 }
