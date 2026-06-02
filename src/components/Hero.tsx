@@ -1,9 +1,6 @@
 import React from 'react'
 import { useReveal } from '../hooks/useReveal'
 
-const FLOW_POSITIONS = ['58%', '67%', '76%', '88%']
-const FLOW_DELAYS = ['0s', '1.25s', '2.5s', '3.75s']
-
 export default function Hero() {
   const ref = useReveal()
 
@@ -13,16 +10,6 @@ export default function Hero() {
       id="inicio"
       ref={ref as React.RefObject<HTMLElement>}
     >
-      <div className="flow" aria-hidden="true">
-        {FLOW_POSITIONS.map((left, i) => (
-          <span
-            key={i}
-            className="tr"
-            style={{ left, animationDelay: FLOW_DELAYS[i] }}
-          />
-        ))}
-      </div>
-
       <img className="hero-mark" src="/mark-white.png" alt="" aria-hidden="true" />
 
       <div className="wrap hero-inner">
@@ -32,7 +19,7 @@ export default function Hero() {
           <h1 className="hero-title">
             <span className="ln"><span>Movemos a tecnologia</span></span>
             <span className="ln"><span>ao seu redor —</span></span>
-            <span className="ln grad-text"><span>você só avança.</span></span>
+            <span className="ln"><span className="grad-text">você só avança.</span></span>
           </h1>
 
           <p className="hero-lead reveal d3">

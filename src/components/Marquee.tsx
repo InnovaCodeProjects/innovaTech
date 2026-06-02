@@ -11,7 +11,7 @@ const CLIENTS = [
 ]
 
 export default function Marquee() {
-  const doubled = [...CLIENTS, ...CLIENTS]
+  const doubled = [...CLIENTS, ...CLIENTS, ...CLIENTS, ...CLIENTS]
 
   return (
     <section className="marquee-sec" aria-label="Empresas que confiam na Innova Tech">
