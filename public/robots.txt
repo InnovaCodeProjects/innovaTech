@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 
 Sitemap: https://innovatech.com.br/sitemap.xml
-Agentmap: https://innovatech.com.br/.well-known/ai-catalog.json
+Agentmap: https://innovatech.com.br/.well-known/ard.json
