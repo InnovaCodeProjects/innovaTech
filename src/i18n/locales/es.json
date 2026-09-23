@@ -1,0 +1,212 @@
+{
+  "nav": {
+    "links": {
+      "services": "Servicios",
+      "support": "Atención",
+      "projects": "Proyectos",
+      "software": "Software",
+      "plans": "Planes",
+      "howWeWork": "Cómo trabajamos"
+    },
+    "ctaButton": "Presupuesto gratis",
+    "openMenu": "Abrir menú",
+    "closeMenu": "Cerrar menú",
+    "waButton": "Hablar por WhatsApp",
+    "waMessage": "¡Hola! Me gustaría un presupuesto gratuito."
+  },
+  "hero": {
+    "titleLine1": "Movemos la tecnología a tu alrededor",
+    "titleLine2": "tú solo avanzas.",
+    "lead": "Facilidad y tranquilidad en cada servicio, para que nunca más te preocupe la tecnología que te rodea. Del hardware al código.",
+    "waButton": "Hablar por WhatsApp",
+    "waMessage": "¡Hola! Quiero un diagnóstico gratuito para mi proyecto.",
+    "viewProjects": "Ver proyectos",
+    "trust": ["Diagnóstico gratis", "Respuesta en hasta 1h", "Garantía en los servicios"]
+  },
+  "services": {
+    "heading1": "Del hardware",
+    "heading2": "al código.",
+    "lead": "Tecnología en la palma de tu mano. Todo lo que necesitas, en un solo lugar.",
+    "logoAlt": "Innova Tech",
+    "items": [
+      { "title": "Asistencia Técnica", "detail": "Reparación, formateo, mejoras y ensamblaje completo de PCs.", "waMessage": "¡Hola! Necesito asistencia técnica." },
+      { "title": "Soporte Remoto", "detail": "Eliminación de virus, optimización y resolución a distancia.", "waMessage": "¡Hola! Necesito soporte remoto." },
+      { "title": "Redes e Infraestructura", "detail": "MikroTik, firewall, VPN y monitoreo 24/7.", "waMessage": "¡Hola! Quiero un proyecto de red/infraestructura." },
+      { "title": "Desarrollo de Software", "detail": "Aplicaciones web y móviles, APIs y sistemas a medida.", "waMessage": "¡Hola! Quiero desarrollar un software/sistema." },
+      { "title": "Diseño y Branding", "detail": "Sitios web, apps, identidad visual y landing pages.", "waMessage": "¡Hola! Me interesan los servicios de diseño." }
+    ]
+  },
+  "whatsappSection": {
+    "heading1": "Tu problema resuelto",
+    "heading2": "en la conversación.",
+    "lead": "Sin formularios, sin espera, sin robots. Envías un mensaje y hablas directo con alguien que entiende. Diagnóstico al instante, por WhatsApp.",
+    "points": [
+      { "title": "Respuesta en hasta 1h", "desc": "En horario comercial, normalmente en minutos." },
+      { "title": "Diagnóstico gratuito", "desc": "Solo pagas si decides continuar con el servicio." },
+      { "title": "Una persona, no un ticket", "desc": "Seguimiento de principio a fin, con quien te atendió." }
+    ],
+    "ctaButton": "Iniciar una conversación",
+    "waMessage": "¡Hola! Quiero un diagnóstico gratuito.",
+    "phoneOnline": "en línea",
+    "today": "HOY",
+    "inputPlaceholder": "Mensaje",
+    "convo": [
+      { "from": "me", "text": "¡Hola! La computadora de la tienda no enciende 😟" },
+      { "from": "them", "text": "¡Buenas tardes! Somos Innova Tech 👋" },
+      { "from": "them", "text": "¿Me pasas el modelo? Ya te adelanto un diagnóstico." },
+      { "from": "me", "text": "Es una Dell Optiplex, dejó de funcionar esta mañana" },
+      { "from": "them", "text": "Probablemente la fuente. El diagnóstico es gratis — podemos pasar hoy mismo ⚡" },
+      { "from": "me", "text": "¡Perfecto, pueden venir! 🙌" }
+    ]
+  },
+  "portfolioHome": {
+    "heading1": "Lo que entregamos",
+    "heading2": "habla por nosotros.",
+    "projects": [
+      { "cat": "Landing Page", "desc": "Landing page profesional y moderna para empresa de servicios, diseño limpio, responsiva y enfocada en conversión.", "tags": ["Landing Page", "Responsiva", "SEO"] },
+      { "cat": "Landing Page", "desc": "Landing page profesional para consultora con identidad visual marcada, navegación fluida, responsividad y alta conversión.", "tags": ["Landing Page", "Responsiva", "SEO"] },
+      { "cat": "TI, Infraestructura", "desc": "Red corporativa en dos sedes conectadas vía VPN MikroTik con firewall y monitoreo.", "tags": ["MikroTik", "VPN", "Firewall"] },
+      { "cat": "Logo, Branding", "desc": "Identidad visual completa con logo y materiales digitales para una marca de tereré de Lençóis Paulista.", "tags": ["Logo", "Branding", "Diseño"] }
+    ],
+    "viewAllButton": "Ver todos los proyectos"
+  },
+  "terminal": {
+    "barTitle": "innova — deploy",
+    "heading1": "Del diagnóstico",
+    "heading2": "al despliegue.",
+    "lead": "Software a medida que resuelve un problema real — rápido, probado y en producción. Web, móvil e integraciones hechas para crecer con tu negocio.",
+    "stack": ["Web Apps", "Apps Móviles", "Integraciones", "Automatizaciones", "MVPs", "SaaS"],
+    "depsResolved": "dependencias resueltas",
+    "buildDone": "build finalizado",
+    "testsLabel": "pruebas",
+    "testsResult": "42/42 superadas",
+    "deployProd": "despliegue en producción",
+    "region": "· región br-se1",
+    "online": "en línea ✦"
+  },
+  "process": {
+    "heading1": "Un proceso que da",
+    "heading2": "seguridad.",
+    "steps": [
+      { "title": "Diagnóstico", "desc": "Entendemos el problema antes de proponer cualquier solución. Gratis y sin compromiso." },
+      { "title": "Propuesta", "desc": "Alcance claro, plazo definido y precio transparente. Apruebas sabiendo todo de antemano." },
+      { "title": "Ejecución", "desc": "Manos a la obra con comunicación constante. Sigues cada etapa del trabajo." },
+      { "title": "Garantía", "desc": "Entregamos y seguimos ahí. Soporte y garantía en todos los servicios — resolvemos de verdad." }
+    ]
+  },
+  "numbers": {
+    "marqueeLabel": "Empresas que ya confiaron en nuestro trabajo",
+    "stats": [
+      { "label": "Clientes atendidos" },
+      { "label": "Años de experiencia" },
+      { "label": "Soporte remoto" },
+      { "label": "Presupuesto gratuito" }
+    ]
+  },
+  "pricing": {
+    "heading1": "Precios claros,",
+    "heading2": "sin sorpresas.",
+    "lead": "Servicios individuales a precio de referencia, o un plan de TI para quienes quieren soporte continuo.",
+    "dividerAvulso": "Planes de TI — Servicios Individuales",
+    "banner": "Diagnóstico 100% gratuito — sin compromiso",
+    "avulso": [
+      { "title": "Formateo y SO", "desc": "Formateo, instalación del sistema y antivirus. Versión avanzada con respaldo: {{extra}}." },
+      { "title": "Limpieza completa", "desc": "Limpieza física interna + formateo + respaldo completo. El más solicitado." },
+      { "title": "Ensamblaje de PC", "desc": "Montaje de componentes, instalación del SO y software básico." },
+      { "title": "Redes y Software", "value": "A medida", "desc": "Proyectos de infraestructura y desarrollo según el alcance." }
+    ],
+    "catalogButton": "Ver tabla completa de precios",
+    "priceNote": "* Piezas y componentes se cobran aparte. Precios de referencia, sujetos a cambio según el diagnóstico.",
+    "dividerPlans": "Planes de TI — Suscripción Mensual",
+    "planIntro": "Soporte continuo, visitas técnicas y descuentos progresivos según el tamaño de tu negocio. Cuantos más equipos, mayor el ahorro.",
+    "plans": [
+      {
+        "name": "Suscripción Esencial",
+        "tag": "",
+        "desc": "Ideal para consultorios, clínicas y pequeños negocios.",
+        "items": ["Soporte remoto ilimitado", "Hasta 3 visitas técnicas al mes", "Descuentos progresivos en servicios", "Piezas y repuestos cotizados aparte"],
+        "extra": "Visita adicional a las incluidas: {{price}}/visita"
+      },
+      {
+        "name": "Suscripción Completa",
+        "tag": "Más contratado",
+        "desc": "Para negocios con mayor volumen y necesidad de mantenimiento continuo.",
+        "items": ["Mantenimiento preventivo mensual", "Mantenimiento correctivo incluido", "Hasta 4 visitas técnicas al mes", "Soporte remoto ilimitado", "20% de descuento en servicios adicionales"],
+        "extra": "Visita adicional a las incluidas: {{price}}/visita"
+      }
+    ],
+    "perMonth": "/mes",
+    "discHead": "Beneficio de suscripción — descuento en servicios adicionales",
+    "discounts": [
+      { "range": "1 equipo" },
+      { "range": "2–5 equipos" },
+      { "range": "6–9 equipos" },
+      { "range": "10+ equipos" }
+    ],
+    "discNote": "Solo pagas por los servicios que uses. El descuento se aplica automáticamente según la cantidad de equipos.",
+    "ctaButton": "Solicitar presupuesto por WhatsApp",
+    "waMessage": "¡Hola! Vi la tabla y me gustaría un presupuesto.",
+    "modalTitle": "Tabla de Precios — Innova Tech",
+    "modalClose": "Cerrar",
+    "iframeTitle": "Tabla de Precios Innova Tech"
+  },
+  "manifesto": {
+    "quotePart1": "Vamos mucho más allá de la TI, somos una",
+    "quoteWord1": "solución",
+    "quotePart2": "con un propósito de",
+    "quoteWord2": "innovación",
+    "signature": "— Innova Tech · Innovando el mañana, hoy"
+  },
+  "cta": {
+    "heading1": "¿Tienes un problema?",
+    "heading2": "Nosotros lo resolvemos.",
+    "lead": "Envía un mensaje ahora y recibe un diagnóstico gratuito. Respuesta rápida, sin vueltas.",
+    "waButton": "Hablar por WhatsApp",
+    "waMessage": "¡Hola! Quiero un diagnóstico gratuito.",
+    "emailButton": "Enviar correo",
+    "emailSubject": "Solicitud de presupuesto — Innova Tech",
+    "metaAvailable": "WhatsApp disponible ahora",
+    "metaResponse": "Respuesta en hasta 1h"
+  },
+  "footer": {
+    "desc": "Innovando el mañana, hoy. Soluciones de TI de alto nivel para empresas y personas, del hardware al código.",
+    "socialAria": { "instagram": "Instagram", "whatsapp": "WhatsApp", "email": "Correo" },
+    "servicesHeading": "Servicios",
+    "servicesItems": ["Asistencia Técnica", "Soporte Remoto", "Redes e Infraestructura", "Desarrollo"],
+    "companyHeading": "Empresa",
+    "companyItems": { "projects": "Proyectos", "howWeWork": "Cómo trabajamos", "numbers": "En números", "plans": "Planes" },
+    "contactHeading": "Contacto",
+    "contactItems": { "whatsapp": "WhatsApp", "email": "Correo", "instagram": "Instagram" },
+    "copyright": "© {{year}} Innova Tech. Todos los derechos reservados.",
+    "tagline": "\"Innovando el mañana, hoy.\""
+  },
+  "whatsappButton": {
+    "aria": "Hablar por WhatsApp",
+    "message": "¡Hola! Los encontré en el sitio web y me gustaría hablar con Innova Tech."
+  },
+  "meta": {
+    "home": {
+      "title": "Innova Tech — Asistencia técnica, redes y desarrollo de software",
+      "description": "Asistencia técnica, soporte remoto, redes MikroTik y desarrollo de software a medida. Diagnóstico gratuito por WhatsApp."
+    },
+    "portfolio": {
+      "title": "Proyectos y Portafolio — Innova Tech",
+      "description": "Conoce los proyectos de Innova Tech por nicho: sitios web, redes MikroTik, desarrollo de software y branding entregados a nuestros clientes."
+    }
+  },
+  "portfolioPage": {
+    "back": "Volver",
+    "heading1": "Proyectos por",
+    "heading2": "nicho.",
+    "lead": "Los separamos por área para que veas exactamente lo que ya hicimos parecido a tu negocio. En construcción — más proyectos próximamente.",
+    "prevAria": "Anterior",
+    "nextAria": "Siguiente",
+    "comingSoon": "Próximamente",
+    "niches": [
+      { "title": "Sitios y Web", "cards": [{ "tag": "LANDING PAGE" }, { "tag": "LANDING PAGE" }, { "tag": "SITIO INSTITUCIONAL" }] },
+      { "title": "Redes e Infraestructura", "cards": [{ "tag": "MIKROTIK, VPN" }, { "title": "Próximamente", "tag": "REDES" }] },
+      { "title": "Desarrollo de Software", "cards": [{ "tag": "SAAS" }, { "tag": "SAAS" }] },
+      { "title": "Diseño y Branding", "cards": [{ "tag": "LOGO, BRANDING" }, { "tag": "UI, TIENDA VIRTUAL" }] }
+    ]
+  }
+}

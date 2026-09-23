@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://innovatech.com.br/sitemap.xml

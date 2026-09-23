@@ -1,8 +1,13 @@
 import React from 'react'
+import { useTranslation } from 'react-i18next'
 import { useReveal } from '../hooks/useReveal'
+import SectionLink from './SectionLink'
+import { waLink } from '../utils/format'
 
 export default function Hero() {
+  const { t } = useTranslation()
   const ref = useReveal()
+  const trust = t('hero.trust', { returnObjects: true }) as string[]
 
   return (
     <section
@@ -10,42 +15,45 @@ export default function Hero() {
       id="inicio"
       ref={ref as React.RefObject<HTMLElement>}
     >
-      <img className="hero-mark" src="/mark-white.png" alt="" aria-hidden="true" />
+      <img
+        className="hero-mark"
+        src="/mark-white.png"
+        alt=""
+        aria-hidden="true"
+        decoding="async"
+        {...({ fetchpriority: 'low' } as React.ImgHTMLAttributes<HTMLImageElement>)}
+      />
 
       <div className="wrap hero-inner">
         <div className="hero-copy">
-          <span className="hero-kicker">Innova Tech · soluções em tecnologia</span>
-
           <h1 className="hero-title">
-            <span className="ln"><span>Movemos a tecnologia</span></span>
-            <span className="ln"><span>ao seu redor —</span></span>
-            <span className="ln"><span className="grad-text">você só avança.</span></span>
+            <span className="ln"><span>{t('hero.titleLine1')}</span></span>
+            <span className="ln grad-text"><span>{t('hero.titleLine2')}</span></span>
           </h1>
 
           <p className="hero-lead reveal d3">
-            Facilidade e segurança em cada serviço, para você nunca mais sentir
-            insegurança com a tecnologia que te cerca. Do hardware ao código.
+            {t('hero.lead')}
           </p>
 
           <div className="hero-actions reveal d3">
             <a
               className="btn btn-wa"
-              href="https://wa.me/5514998040306?text=Ol%C3%A1!%20Quero%20um%20diagn%C3%B3stico%20gratuito%20para%20o%20meu%20projeto."
+              href={waLink(t('hero.waMessage'))}
               target="_blank"
               rel="noopener"
             >
               <i className="bi bi-whatsapp" />
-              Falar no WhatsApp
+              {t('hero.waButton')}
             </a>
-            <a className="btn btn-ghost" href="#portfolio">
-              Ver projetos <i className="bi bi-arrow-right" />
-            </a>
+            <SectionLink id="portfolio" className="btn btn-ghost">
+              {t('hero.viewProjects')} <i className="bi bi-arrow-right" />
+            </SectionLink>
           </div>
 
           <ul className="hero-trust reveal d4">
-            <li><span className="tick"><i className="bi bi-check-lg" /></span>Diagnóstico grátis</li>
-            <li><span className="tick"><i className="bi bi-check-lg" /></span>Resposta em até 1h</li>
-            <li><span className="tick"><i className="bi bi-check-lg" /></span>Garantia nos serviços</li>
+            {trust.map((item) => (
+              <li key={item}><span className="tick"><i className="bi bi-check-lg" /></span>{item}</li>
+            ))}
           </ul>
         </div>
       </div>

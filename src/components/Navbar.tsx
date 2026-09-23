@@ -1,8 +1,27 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef, type ImgHTMLAttributes } from 'react'
+import { useTranslation } from 'react-i18next'
+import { Link } from 'react-router-dom'
+import SectionLink from './SectionLink'
+import { waLink } from '../utils/format'
+
+type LangCode = 'pt' | 'en' | 'es' | 'fr'
+
+const LANGS: { code: LangCode; flag: string; label: string; sub: string }[] = [
+  { code: 'pt', flag: 'flag-br', label: 'Português', sub: 'PT-BR' },
+  { code: 'en', flag: 'flag-us', label: 'English', sub: 'EN-US' },
+  { code: 'es', flag: 'flag-es', label: 'Español', sub: 'ES-ES' },
+  { code: 'fr', flag: 'flag-fr', label: 'Français', sub: 'FR-FR' },
+]
 
 export default function Navbar() {
+  const { t, i18n } = useTranslation()
   const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
+  const [langOpen, setLangOpen] = useState(false)
+  const lang = (i18n.language?.slice(0, 2) as LangCode) || 'pt'
+  const langRef = useRef<HTMLDivElement>(null)
+  const menuRef = useRef<HTMLDivElement>(null)
+  const burgerRef = useRef<HTMLButtonElement>(null)
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24)
@@ -16,37 +35,86 @@ export default function Navbar() {
     return () => { document.body.style.overflow = '' }
   }, [menuOpen])
 
+  useEffect(() => {
+    const onClick = (e: MouseEvent) => {
+      if (langRef.current && !langRef.current.contains(e.target as Node)) setLangOpen(false)
+      if (
+        menuRef.current &&
+        !menuRef.current.contains(e.target as Node) &&
+        burgerRef.current &&
+        !burgerRef.current.contains(e.target as Node)
+      ) {
+        setMenuOpen(false)
+      }
+    }
+    document.addEventListener('click', onClick)
+    return () => document.removeEventListener('click', onClick)
+  }, [])
+
   const close = () => setMenuOpen(false)
+  const changeLang = (code: LangCode) => i18n.changeLanguage(code)
+  const current = LANGS.find((l) => l.code === lang) ?? LANGS[0]
 
   return (
     <>
       <header className={`nav${scrolled ? ' scrolled' : ''}`} id="nav">
         <div className="wrap nav-inner">
-          <a href="#topo" className="brand" aria-label="Innova Tech">
-            <span className="mark"><img src="/mark-white.png" alt="" /></span>
-            <span className="name">INNOVA<b>TECH</b></span>
-          </a>
-
           <nav className="nav-links">
-            <a href="#servicos">Serviços</a>
-            <a href="#atendimento">Atendimento</a>
-            <a href="#portfolio">Projetos</a>
-            <a href="#software">Software</a>
-            <a href="#planos">Planos</a>
+            <SectionLink id="servicos">{t('nav.links.services')}</SectionLink>
+            <SectionLink id="atendimento">{t('nav.links.support')}</SectionLink>
+            <Link to="/portfolio">{t('nav.links.projects')}</Link>
+            <SectionLink id="software">{t('nav.links.software')}</SectionLink>
+            <SectionLink id="planos">{t('nav.links.plans')}</SectionLink>
           </nav>
 
+          <SectionLink id="topo" className="brand">
+            <img
+              className="brand-logo"
+              src="/logo-corrida.png"
+              alt="Innova Tech"
+              width="73"
+              height="38"
+              decoding="async"
+              {...({ fetchpriority: 'high' } as ImgHTMLAttributes<HTMLImageElement>)}
+            />
+          </SectionLink>
+
           <div className="nav-cta">
+            <div className={`lang${langOpen ? ' open' : ''}`} id="lang" ref={langRef}>
+              <button
+                className="lang-btn"
+                aria-haspopup="true"
+                aria-expanded={langOpen}
+                onClick={(e) => { e.stopPropagation(); setLangOpen((o) => !o) }}
+              >
+                <span className={`flag ${current.flag}`} /> {current.code.toUpperCase()}
+              </button>
+              <div className="lang-panel">
+                {LANGS.map((l) => (
+                  <button
+                    key={l.code}
+                    className={l.code === lang ? 'active' : ''}
+                    onClick={() => { changeLang(l.code); setLangOpen(false) }}
+                  >
+                    <span className={`flag ${l.flag}`} /> {l.label} <small>{l.sub}</small>
+                  </button>
+                ))}
+              </div>
+            </div>
+
             <a
-              className="btn btn-primary"
-              href="https://wa.me/5514998040306?text=Ol%C3%A1!%20Gostaria%20de%20um%20or%C3%A7amento%20gratuito."
+              className="btn btn-simple"
+              href={waLink(t('nav.waMessage'))}
               target="_blank"
               rel="noopener"
             >
-              Orçamento grátis
+              {t('nav.ctaButton')}
             </a>
             <button
+              ref={burgerRef}
               className="burger"
-              aria-label={menuOpen ? 'Fechar menu' : 'Abrir menu'}
+              aria-label={menuOpen ? t('nav.closeMenu') : t('nav.openMenu')}
+              aria-expanded={menuOpen}
               onClick={() => setMenuOpen((o) => !o)}
             >
               <i className={menuOpen ? 'bi bi-x-lg' : 'bi bi-list'} />
@@ -56,22 +124,35 @@ export default function Navbar() {
       </header>
 
       <div className={`mobile-menu${menuOpen ? ' open' : ''}`} id="mobileMenu">
-        <a href="#servicos" onClick={close}><span className="mi">01</span>Serviços</a>
-        <a href="#atendimento" onClick={close}><span className="mi">02</span>Atendimento</a>
-        <a href="#portfolio" onClick={close}><span className="mi">03</span>Projetos</a>
-        <a href="#software" onClick={close}><span className="mi">04</span>Software</a>
-        <a href="#processo" onClick={close}><span className="mi">05</span>Como trabalhamos</a>
-        <a href="#planos" onClick={close}><span className="mi">06</span>Planos</a>
-        <a
-          className="btn btn-wa"
-          href="https://wa.me/5514998040306?text=Ol%C3%A1!%20Gostaria%20de%20um%20or%C3%A7amento."
-          target="_blank"
-          rel="noopener"
-          onClick={close}
-        >
-          <i className="bi bi-whatsapp" />
-          Falar no WhatsApp
-        </a>
+        <div className="mm-card" ref={menuRef}>
+          <SectionLink id="servicos" onClick={close}>{t('nav.links.services')}</SectionLink>
+          <SectionLink id="atendimento" onClick={close}>{t('nav.links.support')}</SectionLink>
+          <Link to="/portfolio" onClick={close}>{t('nav.links.projects')}</Link>
+          <SectionLink id="software" onClick={close}>{t('nav.links.software')}</SectionLink>
+          <SectionLink id="processo" onClick={close}>{t('nav.links.howWeWork')}</SectionLink>
+          <SectionLink id="planos" onClick={close}>{t('nav.links.plans')}</SectionLink>
+          <div className="mm-lang">
+            {LANGS.map((l) => (
+              <button
+                key={l.code}
+                className={l.code === lang ? 'active' : ''}
+                onClick={() => changeLang(l.code)}
+              >
+                <span className={`flag ${l.flag}`} />{l.code.toUpperCase()}
+              </button>
+            ))}
+          </div>
+          <a
+            className="btn btn-wa"
+            href={waLink(t('nav.waMessage'))}
+            target="_blank"
+            rel="noopener"
+            onClick={close}
+          >
+            <i className="bi bi-whatsapp" />
+            {t('nav.waButton')}
+          </a>
+        </div>
       </div>
     </>
   )
