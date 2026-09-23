@@ -1,5 +1,7 @@
 import React, { useEffect, useRef } from 'react'
+import { useTranslation } from 'react-i18next'
 import { useReveal } from '../hooks/useReveal'
+import { waLink } from '../utils/format'
 
 const CHECK_ICON = (
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.9">
@@ -24,40 +26,48 @@ const WA_ICON = (
 )
 
 type Msg = { from: 'me' | 'them'; text: string; t: string; wait?: number }
+type ConvoText = { from: 'me' | 'them'; text: string }
 
-const CONVO: Msg[] = [
-  { from: 'me',   text: 'Oi! O computador da loja não liga 😟', t: '14:02' },
-  { from: 'them', text: 'Boa tarde! Aqui é da Innova Tech 👋', t: '14:02', wait: 1100 },
-  { from: 'them', text: 'Me passa o modelo? Já adianto um diagnóstico pra você.', t: '14:02', wait: 1600 },
-  { from: 'me',   text: 'É um Dell Optiplex, parou hoje de manhã', t: '14:03', wait: 1400 },
-  { from: 'them', text: 'Provável a fonte. O diagnóstico é gratuito — passamos aí hoje ainda ⚡', t: '14:03', wait: 1900 },
-  { from: 'me',   text: 'Perfeito, pode vir! 🙌', t: '14:04', wait: 1300 },
+const TIMING: { t: string; wait?: number }[] = [
+  { t: '14:02' },
+  { t: '14:02', wait: 1100 },
+  { t: '14:02', wait: 1600 },
+  { t: '14:03', wait: 1400 },
+  { t: '14:03', wait: 1900 },
+  { t: '14:04', wait: 1300 },
 ]
 
 export default function WhatsAppSection() {
+  const { t, i18n } = useTranslation()
   const sectionRef = useReveal()
   const bodyRef = useRef<HTMLDivElement>(null)
   const typingRef = useRef<HTMLDivElement>(null)
   const startedRef = useRef(false)
+  const convoText = t('whatsappSection.convo', { returnObjects: true }) as ConvoText[]
+  const CONVO: Msg[] = convoText.map((c, i) => ({ ...c, ...TIMING[i] }))
 
   useEffect(() => {
     const body = bodyRef.current
     const typing = typingRef.current
     if (!body || !typing) return
 
+    let cancelled = false
+
     function addBubble(msg: Msg) {
       const b = document.createElement('div')
       b.className = `bubble ${msg.from}`
       b.innerHTML = `${msg.text}<span class="tm">${msg.t}</span>`
-      const t = body!.querySelector('.typing')
-      if (t) body!.insertBefore(b, t); else body!.appendChild(b)
+      const typingEl = body!.querySelector('.typing')
+      if (typingEl) body!.insertBefore(b, typingEl); else body!.appendChild(b)
       void b.offsetWidth
       b.classList.add('show')
     }
 
     function runChat(idx: number) {
+      if (cancelled) return
       if (idx >= CONVO.length) {
         setTimeout(() => {
+          if (cancelled) return
           body!.querySelectorAll('.bubble').forEach((b) => b.remove())
           runChat(0)
         }, 4500)
@@ -68,16 +78,25 @@ export default function WhatsAppSection() {
       if (msg.from === 'them') {
         typing!.classList.add('show')
         setTimeout(() => {
+          if (cancelled) return
           typing!.classList.remove('show')
           addBubble(msg)
           runChat(idx + 1)
         }, delay)
       } else {
         setTimeout(() => {
+          if (cancelled) return
           addBubble(msg)
           runChat(idx + 1)
         }, delay)
       }
+    }
+
+    if (startedRef.current) {
+      body.querySelectorAll('.bubble').forEach((b) => b.remove())
+      typing.classList.remove('show')
+      runChat(0)
+      return () => { cancelled = true }
     }
 
     const observer = new IntersectionObserver(
@@ -92,8 +111,11 @@ export default function WhatsAppSection() {
       { threshold: 0.4 }
     )
     observer.observe(body)
-    return () => observer.disconnect()
-  }, [])
+    return () => {
+      cancelled = true
+      observer.disconnect()
+    }
+  }, [i18n.language])
 
   return (
     <section
@@ -103,41 +125,29 @@ export default function WhatsAppSection() {
     >
       <div className="wrap wa-inner">
         <div className="wa-copy reveal">
-          <h2>Seu problema resolvido <span className="grad-text">na conversa.</span></h2>
-          <p>Sem formulário, sem espera, sem robô. Você manda uma mensagem e fala direto com quem entende. Diagnóstico na hora, pelo WhatsApp.</p>
+          <h2>{t('whatsappSection.heading1')} <span className="grad-text">{t('whatsappSection.heading2')}</span></h2>
+          <p>{t('whatsappSection.lead')}</p>
 
           <div className="wa-points">
-            <div className="wa-point">
-              <span className="pi">{ZAP_ICON}</span>
-              <span className="pt">
-                <b>Resposta em até 1h</b>
-                <span>No horário comercial, normalmente em minutos.</span>
-              </span>
-            </div>
-            <div className="wa-point">
-              <span className="pi">{CHECK_ICON}</span>
-              <span className="pt">
-                <b>Diagnóstico gratuito</b>
-                <span>Você só paga se decidir seguir com o serviço.</span>
-              </span>
-            </div>
-            <div className="wa-point">
-              <span className="pi">{USER_ICON}</span>
-              <span className="pt">
-                <b>Uma pessoa, não um ticket</b>
-                <span>Acompanhamento do começo ao fim, com quem te atendeu.</span>
-              </span>
-            </div>
+            {(t('whatsappSection.points', { returnObjects: true }) as { title: string; desc: string }[]).map((p, i) => (
+              <div className="wa-point" key={p.title}>
+                <span className="pi">{[ZAP_ICON, CHECK_ICON, USER_ICON][i]}</span>
+                <span className="pt">
+                  <b>{p.title}</b>
+                  <span>{p.desc}</span>
+                </span>
+              </div>
+            ))}
           </div>
 
           <a
             className="btn btn-wa"
-            href="https://wa.me/5514998040306?text=Ol%C3%A1!%20Quero%20um%20diagn%C3%B3stico%20gratuito."
+            href={waLink(t('whatsappSection.waMessage'))}
             target="_blank"
             rel="noopener"
           >
             {WA_ICON}
-            Começar uma conversa
+            {t('whatsappSection.ctaButton')}
           </a>
         </div>
 
@@ -155,7 +165,7 @@ export default function WhatsAppSection() {
                       <polyline points="20 6 9 17 4 12"/>
                     </svg>
                   </b>
-                  <span><span className="od" />online</span>
+                  <span><span className="od" />{t('whatsappSection.phoneOnline')}</span>
                 </span>
                 <span className="hicons">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -168,14 +178,14 @@ export default function WhatsAppSection() {
               </div>
 
               <div className="wa-body" ref={bodyRef}>
-                <span className="wa-day">HOJE</span>
+                <span className="wa-day">{t('whatsappSection.today')}</span>
                 <div className="typing" ref={typingRef}>
                   <span /><span /><span />
                 </div>
               </div>
 
               <div className="wa-input">
-                <span className="field">Mensagem</span>
+                <span className="field">{t('whatsappSection.inputPlaceholder')}</span>
                 <span className="send">
                   <svg viewBox="0 0 24 24" fill="currentColor">
                     <path d="M3 20.5 21 12 3 3.5 3 10l12 2-12 2z"/>

@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from 'react'
+import { useTranslation } from 'react-i18next'
 import { useReveal } from '../hooks/useReveal'
 import libraLogo from '../partners_assets/logos/libra.webp'
 import plasaLogo from '../partners_assets/logos/plasa.webp'
@@ -12,19 +13,18 @@ const CLIENTS = [
   { src: leoLogo, alt: "Leo's Tereré" },
 ]
 
-type Stat = {
+type StatMeta = {
   count: number
   prefix?: string
   suffix?: string
-  label: string
   delay: string
 }
 
-const STATS: Stat[] = [
-  { count: 100, prefix: '+', label: 'Clientes atendidos', delay: '' },
-  { count: 4,   suffix: '+', label: 'Anos de experiência', delay: 'd1' },
-  { count: 24,  suffix: 'h', label: 'Suporte remoto', delay: 'd2' },
-  { count: 100, suffix: '%', label: 'Orçamento gratuito', delay: 'd3' },
+const STATS_META: StatMeta[] = [
+  { count: 100, prefix: '+', delay: '' },
+  { count: 4,   suffix: '+', delay: 'd1' },
+  { count: 24,  suffix: 'h', delay: 'd2' },
+  { count: 100, suffix: '%', delay: 'd3' },
 ]
 
 function animateCount(el: HTMLElement, target: number, prefix: string, suffix: string) {
@@ -42,8 +42,10 @@ function animateCount(el: HTMLElement, target: number, prefix: string, suffix: s
 }
 
 export default function Numbers() {
+  const { t } = useTranslation()
   const sectionRef = useReveal()
   const counted = useRef(new WeakSet<Element>())
+  const stats = (t('numbers.stats', { returnObjects: true }) as { label: string }[]).map((s, i) => ({ ...s, ...STATS_META[i] }))
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -76,7 +78,7 @@ export default function Numbers() {
     >
       <img className="wm-numbers" src="/mark-white.png" alt="" aria-hidden="true" loading="lazy" decoding="async" />
       <div className="wrap">
-        <p className="marquee-label reveal">Empresas que já confiaram no nosso trabalho</p>
+        <p className="marquee-label reveal">{t('numbers.marqueeLabel')}</p>
       </div>
       <div className="marquee">
         <div className="marquee-track">
@@ -89,7 +91,7 @@ export default function Numbers() {
       </div>
       <div className="wrap">
         <div className="stats-row" style={{ marginTop: 52 }}>
-          {STATS.map((s) => (
+          {stats.map((s) => (
             <div key={s.label} className={`stat2 reveal${s.delay ? ' ' + s.delay : ''}`}>
               <div
                 className="sv"

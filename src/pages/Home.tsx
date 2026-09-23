@@ -1,5 +1,7 @@
 import { motion } from 'framer-motion'
+import { useTranslation } from 'react-i18next'
 import { useScrollBackground } from '../hooks/useScrollBackground'
+import { useDocumentMeta } from '../hooks/useDocumentMeta'
 import Hero from '../components/Hero'
 import Services from '../components/Services'
 import WhatsAppSection from '../components/WhatsAppSection'
@@ -24,6 +26,8 @@ const BG_ZONES = [
 ]
 
 export default function Home() {
+  const { t } = useTranslation()
+  useDocumentMeta(t('meta.home.title'), t('meta.home.description'))
   const bg = useScrollBackground(BG_ZONES)
 
   return (

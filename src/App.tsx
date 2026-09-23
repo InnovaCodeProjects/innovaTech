@@ -1,4 +1,5 @@
 import { useEffect } from 'react'
+import { useTranslation } from 'react-i18next'
 import { Routes, Route, useLocation, useNavigate } from 'react-router-dom'
 import Navbar from './components/Navbar'
 import WhatsAppButton from './components/WhatsAppButton'
@@ -26,6 +27,12 @@ function ScrollManager() {
 }
 
 export default function App() {
+  const { i18n } = useTranslation()
+
+  useEffect(() => {
+    document.documentElement.lang = i18n.language
+  }, [i18n.language])
+
   useEffect(() => {
     const bar = document.getElementById('scrollbar')
     const onScroll = () => {

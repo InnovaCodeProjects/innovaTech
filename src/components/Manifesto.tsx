@@ -1,7 +1,9 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 import { useReveal } from "../hooks/useReveal";
 
 export default function Manifesto() {
+  const { t } = useTranslation();
   const ref = useReveal();
 
   return (
@@ -15,10 +17,10 @@ export default function Manifesto() {
       <div className="glow" />
       <div className="wrap manifesto-inner reveal">
         <blockquote>
-          Muito além do T.I. somos uma <span className="mut">solução</span> com
-          propósito de <span className="mut">inovação</span>
+          {t("manifesto.quotePart1")} <span className="mut">{t("manifesto.quoteWord1")}</span>{" "}
+          {t("manifesto.quotePart2")} <span className="mut">{t("manifesto.quoteWord2")}</span>
         </blockquote>
-        <p className="sig">— Innova Tech · Inovando o amanhã, hoje</p>
+        <p className="sig">{t("manifesto.signature")}</p>
       </div>
     </section>
   );

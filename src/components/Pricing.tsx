@@ -1,81 +1,65 @@
 import React, { useState, useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import { useReveal } from "../hooks/useReveal";
+import { formatBRL, waLink } from "../utils/format";
 
-const AVULSO = [
-  {
-    title: "Formatação & SO",
-    value: "R$ 80",
-    desc: "Formatação, instalação do sistema e antivírus. Versão avançada com backup: R$ 100.",
-    feat: false,
-    delay: "",
-  },
-  {
-    title: "Limpeza completa",
-    value: "R$ 150",
-    desc: "Limpeza física interna + formatação + backup completo. Mais pedido.",
-    feat: true,
-    delay: "d1",
-  },
-  {
-    title: "Montagem de PC",
-    value: "R$ 250",
-    desc: "Montagem dos componentes, instalação do SO e softwares básicos.",
-    feat: false,
-    delay: "d2",
-  },
-  {
-    title: "Rede & Software",
-    value: "Sob medida",
-    desc: "Projetos de infraestrutura e desenvolvimento conforme o escopo.",
-    feat: false,
-    delay: "d3",
-  },
+const AVULSO_META = [
+  { value: formatBRL(80), extra: formatBRL(100), feat: false, delay: "" },
+  { value: formatBRL(150), feat: true, delay: "d1" },
+  { value: formatBRL(250), feat: false, delay: "d2" },
+  { value: null as string | null, feat: false, delay: "d3" },
 ];
 
-const PLANS = [
-  {
-    name: "Assinatura Essencial",
-    value: "R$ 200",
-    tag: "",
-    desc: "Ideal para consultórios, clínicas e pequenos estabelecimentos.",
-    items: [
-      "Suporte remoto ilimitado",
-      "Até 3 visitas técnicas por mês",
-      "Descontos progressivos em serviços",
-      "Peças e substituições orçadas à parte",
-    ],
-    extra: "Visita além das inclusas: R$ 50/visita",
-    feat: false,
-    delay: "",
-  },
-  {
-    name: "Assinatura Completa",
-    value: "R$ 420",
-    tag: "Mais contratado",
-    desc: "Para negócios com maior volume e necessidade de manutenção contínua.",
-    items: [
-      "Manutenção preventiva mensal",
-      "Manutenção corretiva inclusa",
-      "Até 4 visitas técnicas por mês",
-      "Suporte remoto ilimitado",
-      "20% de desconto em serviços adicionais",
-    ],
-    extra: "Visita além das inclusas: R$ 50/visita",
-    feat: true,
-    delay: "d1",
-  },
+const PLANS_META = [
+  { value: formatBRL(200), extraPrice: formatBRL(50), feat: false, delay: "" },
+  { value: formatBRL(420), extraPrice: formatBRL(50), feat: true, delay: "d1" },
 ];
 
-const DISCOUNTS = [
-  { range: "1 máquina", pct: "20%" },
-  { range: "2–5 máquinas", pct: "25%" },
-  { range: "6–9 máquinas", pct: "30%" },
-  { range: "10+ máquinas", pct: "60%" },
+const DISCOUNTS_META = [
+  { pct: "20%" },
+  { pct: "25%" },
+  { pct: "30%" },
+  { pct: "60%" },
 ];
+
+type AvulsoText = { title: string; desc: string; value?: string };
+type PlanText = { name: string; tag: string; desc: string; items: string[]; extra: string };
+type DiscountText = { range: string };
 
 export default function Pricing() {
+  const { t } = useTranslation();
   const ref = useReveal();
   const [pdfOpen, setPdfOpen] = useState(false);
+
+  const AVULSO = (t("pricing.avulso", { returnObjects: true }) as AvulsoText[]).map((item, i) => {
+    const meta = AVULSO_META[i];
+    return {
+      title: item.title,
+      value: item.value ?? meta.value,
+      desc: t(`pricing.avulso.${i}.desc`, meta.extra ? { extra: meta.extra } : undefined),
+      feat: meta.feat,
+      delay: meta.delay,
+    };
+  });
+
+  const PLANS = (t("pricing.plans", { returnObjects: true }) as PlanText[]).map((plan, i) => {
+    const meta = PLANS_META[i];
+    return {
+      name: plan.name,
+      value: meta.value,
+      tag: plan.tag,
+      desc: plan.desc,
+      items: plan.items,
+      extra: t(`pricing.plans.${i}.extra`, { price: meta.extraPrice }),
+      feat: meta.feat,
+      delay: meta.delay,
+    };
+  });
+
+  const DISCOUNTS = (t("pricing.discounts", { returnObjects: true }) as DiscountText[]).map((d, i) => ({
+    range: d.range,
+    pct: DISCOUNTS_META[i].pct,
+  }));
 
   useEffect(() => {
     if (!pdfOpen) return;
@@ -107,21 +91,20 @@ export default function Pricing() {
             }}
           >
             <h2>
-              Preços claros, <span className="grad-text">sem surpresas.</span>
+              {t("pricing.heading1")} <span className="grad-text">{t("pricing.heading2")}</span>
             </h2>
             <p style={{ marginLeft: "auto", marginRight: "auto" }}>
-              Serviços avulsos com valor de referência ou plano de T.I. para
-              quem quer suporte contínuo.
+              {t("pricing.lead")}
             </p>
           </div>
 
           <div className="plans-divider reveal">
-            Planos de T.I. — Serviços Avulsos
+            {t("pricing.dividerAvulso")}
           </div>
 
           <div className="price-banner reveal">
             <i className="bi bi-check-circle" />
-            Diagnóstico 100% gratuito — sem compromisso
+            {t("pricing.banner")}
           </div>
 
           <div className="price-grid">
@@ -148,23 +131,20 @@ export default function Pricing() {
               onClick={() => setPdfOpen(true)}
             >
               <i className="bi bi-file-earmark-pdf" />
-              Ver tabela completa de preços
+              {t("pricing.catalogButton")}
             </button>
           </div>
 
           <p className="price-note">
-            * Valores de peças e componentes cobrados à parte. Preços de
-            referência, sujeitos a alteração conforme o diagnóstico.
+            {t("pricing.priceNote")}
           </p>
 
           <div className="plans-divider reveal">
-            Planos de T.I. — Assinatura Mensal
+            {t("pricing.dividerPlans")}
           </div>
 
           <p className="plan-intro reveal">
-            Suporte contínuo, visitas técnicas e descontos progressivos conforme
-            o tamanho do seu negócio. Quanto mais equipamentos, maior a
-            economia.
+            {t("pricing.planIntro")}
           </p>
 
           <div className="plan-grid">
@@ -179,7 +159,7 @@ export default function Pricing() {
                 </div>
                 <div className="plan-val">
                   {plan.value}
-                  <span>/mês</span>
+                  <span>{t("pricing.perMonth")}</span>
                 </div>
                 <p className="plan-desc">{plan.desc}</p>
                 <ul className="plan-items">
@@ -193,7 +173,7 @@ export default function Pricing() {
           </div>
 
           <p className="disc-head reveal">
-            Benefício de assinatura — desconto em serviços adicionais
+            {t("pricing.discHead")}
           </p>
           <div className="disc-table reveal">
             {DISCOUNTS.map((d) => (
@@ -204,19 +184,18 @@ export default function Pricing() {
             ))}
           </div>
           <p className="disc-note reveal">
-            Você só paga pelos serviços que utilizar. O desconto é aplicado
-            automaticamente conforme a quantidade de equipamentos.
+            {t("pricing.discNote")}
           </p>
 
           <div className="price-cta reveal">
             <a
               className="btn btn-wa"
-              href="https://wa.me/5514998040306?text=Ol%C3%A1!%20Vi%20a%20tabela%20e%20gostaria%20de%20um%20or%C3%A7amento."
+              href={waLink(t("pricing.waMessage"))}
               target="_blank"
               rel="noopener"
             >
               <i className="bi bi-whatsapp" />
-              Solicitar orçamento via WhatsApp
+              {t("pricing.ctaButton")}
             </a>
           </div>
         </div>
@@ -226,18 +205,18 @@ export default function Pricing() {
         <div className="pdf-modal" onClick={() => setPdfOpen(false)}>
           <div className="pdf-modal-inner" onClick={(e) => e.stopPropagation()}>
             <div className="pdf-modal-bar">
-              <span>Tabela de Preços — Innova Tech</span>
+              <span>{t("pricing.modalTitle")}</span>
               <button
                 className="pdf-modal-close"
                 onClick={() => setPdfOpen(false)}
-                aria-label="Fechar"
+                aria-label={t("pricing.modalClose") as string}
               >
                 <i className="bi bi-x-lg" />
               </button>
             </div>
             <iframe
               src="/tabela-innova.pdf"
-              title="Tabela de Preços Innova Tech"
+              title={t("pricing.iframeTitle") as string}
             />
           </div>
         </div>

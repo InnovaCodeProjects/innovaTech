@@ -1,6 +1,8 @@
 import { useState, useEffect, useRef, type ImgHTMLAttributes } from 'react'
+import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
 import SectionLink from './SectionLink'
+import { waLink } from '../utils/format'
 
 type LangCode = 'pt' | 'en' | 'es' | 'fr'
 
@@ -12,10 +14,11 @@ const LANGS: { code: LangCode; flag: string; label: string; sub: string }[] = [
 ]
 
 export default function Navbar() {
+  const { t, i18n } = useTranslation()
   const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
   const [langOpen, setLangOpen] = useState(false)
-  const [lang, setLang] = useState<LangCode>('pt')
+  const lang = (i18n.language?.slice(0, 2) as LangCode) || 'pt'
   const langRef = useRef<HTMLDivElement>(null)
   const menuRef = useRef<HTMLDivElement>(null)
   const burgerRef = useRef<HTMLButtonElement>(null)
@@ -49,18 +52,19 @@ export default function Navbar() {
   }, [])
 
   const close = () => setMenuOpen(false)
-  const current = LANGS.find((l) => l.code === lang)!
+  const changeLang = (code: LangCode) => i18n.changeLanguage(code)
+  const current = LANGS.find((l) => l.code === lang) ?? LANGS[0]
 
   return (
     <>
       <header className={`nav${scrolled ? ' scrolled' : ''}`} id="nav">
         <div className="wrap nav-inner">
           <nav className="nav-links">
-            <SectionLink id="servicos">Serviços</SectionLink>
-            <SectionLink id="atendimento">Atendimento</SectionLink>
-            <Link to="/portfolio">Projetos</Link>
-            <SectionLink id="software">Software</SectionLink>
-            <SectionLink id="planos">Planos</SectionLink>
+            <SectionLink id="servicos">{t('nav.links.services')}</SectionLink>
+            <SectionLink id="atendimento">{t('nav.links.support')}</SectionLink>
+            <Link to="/portfolio">{t('nav.links.projects')}</Link>
+            <SectionLink id="software">{t('nav.links.software')}</SectionLink>
+            <SectionLink id="planos">{t('nav.links.plans')}</SectionLink>
           </nav>
 
           <SectionLink id="topo" className="brand">
@@ -90,7 +94,7 @@ export default function Navbar() {
                   <button
                     key={l.code}
                     className={l.code === lang ? 'active' : ''}
-                    onClick={() => { setLang(l.code); setLangOpen(false) }}
+                    onClick={() => { changeLang(l.code); setLangOpen(false) }}
                   >
                     <span className={`flag ${l.flag}`} /> {l.label} <small>{l.sub}</small>
                   </button>
@@ -100,16 +104,16 @@ export default function Navbar() {
 
             <a
               className="btn btn-simple"
-              href="https://wa.me/5514998040306?text=Ol%C3%A1!%20Gostaria%20de%20um%20or%C3%A7amento%20gratuito."
+              href={waLink(t('nav.waMessage'))}
               target="_blank"
               rel="noopener"
             >
-              Orçamento grátis
+              {t('nav.ctaButton')}
             </a>
             <button
               ref={burgerRef}
               className="burger"
-              aria-label={menuOpen ? 'Fechar menu' : 'Abrir menu'}
+              aria-label={menuOpen ? t('nav.closeMenu') : t('nav.openMenu')}
               aria-expanded={menuOpen}
               onClick={() => setMenuOpen((o) => !o)}
             >
@@ -121,18 +125,18 @@ export default function Navbar() {
 
       <div className={`mobile-menu${menuOpen ? ' open' : ''}`} id="mobileMenu">
         <div className="mm-card" ref={menuRef}>
-          <SectionLink id="servicos" onClick={close}>Serviços</SectionLink>
-          <SectionLink id="atendimento" onClick={close}>Atendimento</SectionLink>
-          <Link to="/portfolio" onClick={close}>Projetos</Link>
-          <SectionLink id="software" onClick={close}>Software</SectionLink>
-          <SectionLink id="processo" onClick={close}>Como trabalhamos</SectionLink>
-          <SectionLink id="planos" onClick={close}>Planos</SectionLink>
+          <SectionLink id="servicos" onClick={close}>{t('nav.links.services')}</SectionLink>
+          <SectionLink id="atendimento" onClick={close}>{t('nav.links.support')}</SectionLink>
+          <Link to="/portfolio" onClick={close}>{t('nav.links.projects')}</Link>
+          <SectionLink id="software" onClick={close}>{t('nav.links.software')}</SectionLink>
+          <SectionLink id="processo" onClick={close}>{t('nav.links.howWeWork')}</SectionLink>
+          <SectionLink id="planos" onClick={close}>{t('nav.links.plans')}</SectionLink>
           <div className="mm-lang">
             {LANGS.map((l) => (
               <button
                 key={l.code}
                 className={l.code === lang ? 'active' : ''}
-                onClick={() => setLang(l.code)}
+                onClick={() => changeLang(l.code)}
               >
                 <span className={`flag ${l.flag}`} />{l.code.toUpperCase()}
               </button>
@@ -140,13 +144,13 @@ export default function Navbar() {
           </div>
           <a
             className="btn btn-wa"
-            href="https://wa.me/5514998040306?text=Ol%C3%A1!%20Gostaria%20de%20um%20or%C3%A7amento."
+            href={waLink(t('nav.waMessage'))}
             target="_blank"
             rel="noopener"
             onClick={close}
           >
             <i className="bi bi-whatsapp" />
-            Falar no WhatsApp
+            {t('nav.waButton')}
           </a>
         </div>
       </div>

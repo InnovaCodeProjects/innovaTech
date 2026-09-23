@@ -1,31 +1,15 @@
 import React from 'react'
+import { useTranslation } from 'react-i18next'
 import { useReveal } from '../hooks/useReveal'
 
-const STEPS = [
-  {
-    n: '01',
-    title: 'Diagnóstico',
-    desc: 'Entendemos o problema antes de propor qualquer solução. Gratuito e sem compromisso.',
-  },
-  {
-    n: '02',
-    title: 'Proposta',
-    desc: 'Escopo claro, prazo definido e preço transparente. Você aprova sabendo de tudo.',
-  },
-  {
-    n: '03',
-    title: 'Execução',
-    desc: 'Mãos à obra com comunicação constante. Você acompanha cada etapa do trabalho.',
-  },
-  {
-    n: '04',
-    title: 'Garantia',
-    desc: 'Entregamos e ficamos. Suporte e garantia em todos os serviços — resolvemos de verdade.',
-  },
-]
+const NUMS = ['01', '02', '03', '04']
+
+type Step = { title: string; desc: string }
 
 export default function Process() {
+  const { t } = useTranslation()
   const ref = useReveal()
+  const steps = (t('process.steps', { returnObjects: true }) as Step[]).map((s, i) => ({ n: NUMS[i], ...s }))
 
   return (
     <section
@@ -35,10 +19,10 @@ export default function Process() {
     >
       <div className="wrap">
         <div className="section-head reveal">
-          <h2>Um processo que dá <span className="grad-text">segurança.</span></h2>
+          <h2>{t('process.heading1')} <span className="grad-text">{t('process.heading2')}</span></h2>
         </div>
         <div className="proc reveal">
-          {STEPS.map((s) => (
+          {steps.map((s) => (
             <div key={s.n} className="proc-step">
               <div className="pn">{s.n}</div>
               <h3>{s.title}</h3>

@@ -1,48 +1,18 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 import { useReveal } from "../hooks/useReveal";
+import { waLink } from "../utils/format";
 
-const SERVICES = [
-  {
-    n: "n1",
-    icon: "bi-tools",
-    title: "Assistência Técnica",
-    detail: "Reparo, formatação, upgrades e montagem completa de PCs.",
-    href: "https://wa.me/5514998040306?text=Ol%C3%A1!%20Preciso%20de%20assist%C3%AAncia%20t%C3%A9cnica.",
-  },
-  {
-    n: "n2",
-    icon: "bi-headset",
-    title: "Suporte Remoto",
-    detail: "Remoção de vírus, otimização e resolução à distância.",
-    href: "https://wa.me/5514998040306?text=Ol%C3%A1!%20Preciso%20de%20suporte%20remoto.",
-  },
-  {
-    n: "n3",
-    icon: "bi-hdd-network",
-    title: "Redes & Infraestrutura",
-    detail: "MikroTik, firewall, VPN e monitoramento 24/7.",
-    href: "https://wa.me/5514998040306?text=Ol%C3%A1!%20Quero%20um%20projeto%20de%20rede%2Finfraestrutura.",
-  },
-  {
-    n: "n4",
-    icon: "bi-code-slash",
-    title: "Desenvolvimento de Software",
-    detail: "Aplicações web e mobile, APIs e sistemas sob medida.",
-    href: "https://wa.me/5514998040306?text=Ol%C3%A1!%20Quero%20desenvolver%20um%20software%2Fsistema.",
-  },
-  {
-    n: "n5",
-    icon: "bi-palette2",
-    title: "Design & Branding",
-    detail: "Sites, apps, identidade visual e landing pages.",
-    href: "https://wa.me/5514998040306?text=Ol%C3%A1!%20Tenho%20interesse%20em%20servi%C3%A7os%20de%20design.",
-  },
-];
-
+const ICONS = ["bi-tools", "bi-headset", "bi-hdd-network", "bi-code-slash", "bi-palette2"];
 const DELAYS = ["d1", "d2", "d3", "d4", "d5"];
 
+type ServiceItem = { title: string; detail: string; waMessage: string };
+
 export default function Services() {
+  const { t } = useTranslation();
   const ref = useReveal();
+  const items = t("services.items", { returnObjects: true }) as ServiceItem[];
+  const SERVICES = items.map((s, i) => ({ n: `n${i + 1}`, icon: ICONS[i], ...s, href: waLink(s.waMessage) }));
 
   return (
     <section
@@ -57,18 +27,17 @@ export default function Services() {
           style={{ margin: "0 auto 10px", textAlign: "center", maxWidth: 640 }}
         >
           <h2>
-            Do hardware <span className="grad-text">ao código.</span>
+            {t("services.heading1")} <span className="grad-text">{t("services.heading2")}</span>
           </h2>
           <p style={{ margin: "0 auto" }}>
-            Tecnologia na palma da sua mão. Tudo o que você precisa, em um só
-            lugar.
+            {t("services.lead")}
           </p>
         </div>
 
         <div className="flow-wrap reveal">
           <div className="flow-stage">
             <div className="flow-center">
-              <img src="/mark-white.png" alt="Innova Tech" />
+              <img src="/mark-white.png" alt={t("services.logoAlt") as string} />
             </div>
             <svg
               className="flow-lines"

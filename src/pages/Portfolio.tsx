@@ -1,4 +1,5 @@
 import { useRef } from 'react'
+import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
 import { useDocumentMeta } from '../hooks/useDocumentMeta'
 import SectionLink from '../components/SectionLink'
@@ -19,43 +20,54 @@ type Niche = {
   cards: Card[]
 }
 
-const NICHES: Niche[] = [
+const NICHES_META = [
   {
-    title: 'Sites & Web',
     alt: false,
     cards: [
-      { title: 'Libra Serv', tag: 'LANDING PAGE', img: libraImg },
-      { title: 'Plasa Consultoria', tag: 'LANDING PAGE', img: plasaImg },
-      { title: 'Sem Filtro', tag: 'SITE INSTITUCIONAL', img: semfiltroImg, href: 'https://semfiltro.innovatech.dev.br' },
+      { title: 'Libra Serv', img: libraImg },
+      { title: 'Plasa Consultoria', img: plasaImg },
+      { title: 'Sem Filtro', img: semfiltroImg, href: 'https://semfiltro.innovatech.dev.br' },
     ],
   },
   {
-    title: 'Redes & Infraestrutura',
     alt: true,
     cards: [
-      { title: 'Farmácia Homeopática Lençóis', tag: 'MIKROTIK, VPN', img: farmaImg },
-      { title: 'Em breve', tag: 'REDES' },
+      { title: 'Farmácia Homeopática Lençóis', img: farmaImg },
+      {},
     ],
   },
   {
-    title: 'Desenvolvimento de Software',
     alt: false,
     cards: [
-      { title: 'PreciFiltra', tag: 'SAAS', img: precifiltraImg },
-      { title: 'Escritor.ai', tag: 'SAAS', img: escritorImg },
+      { title: 'PreciFiltra', img: precifiltraImg },
+      { title: 'Escritor.ai', img: escritorImg },
     ],
   },
   {
-    title: 'Design & Branding',
     alt: true,
     cards: [
-      { title: "Leo's Tereré", tag: 'LOGO, BRANDING', img: leoImg },
-      { title: 'Maqfer', tag: 'UI, LOJA VIRTUAL', img: maqferImg },
+      { title: "Leo's Tereré", img: leoImg },
+      { title: 'Maqfer', img: maqferImg },
     ],
   },
 ]
 
+type NicheText = { title: string; cards: { title?: string; tag: string }[] }
+
+function buildNiches(texts: NicheText[]): Niche[] {
+  return NICHES_META.map((meta, i) => ({
+    title: texts[i].title,
+    alt: meta.alt,
+    cards: meta.cards.map((c, j) => ({
+      ...c,
+      title: texts[i].cards[j].title ?? c.title ?? '',
+      tag: texts[i].cards[j].tag,
+    })),
+  }))
+}
+
 function NicheSection({ niche }: { niche: Niche }) {
+  const { t } = useTranslation()
   const carouselRef = useRef<HTMLDivElement>(null)
 
   const scroll = (dir: number) => {
@@ -68,10 +80,10 @@ function NicheSection({ niche }: { niche: Niche }) {
         <div className="niche-head">
           <h2>{niche.title}</h2>
           <div className="niche-nav">
-            <button aria-label="Anterior" onClick={() => scroll(-1)}>
+            <button aria-label={t('portfolioPage.prevAria') as string} onClick={() => scroll(-1)}>
               <i className="bi bi-arrow-left" />
             </button>
-            <button aria-label="Próximo" onClick={() => scroll(1)}>
+            <button aria-label={t('portfolioPage.nextAria') as string} onClick={() => scroll(1)}>
               <i className="bi bi-arrow-right" />
             </button>
           </div>
@@ -81,7 +93,7 @@ function NicheSection({ niche }: { niche: Niche }) {
             const thumb = c.img ? (
               <img className="cc-thumb" src={c.img} alt={c.title} width="700" height="220" loading="lazy" decoding="async" />
             ) : (
-              <div className="cc-thumb placeholder">Em breve</div>
+              <div className="cc-thumb placeholder">{t('portfolioPage.comingSoon')}</div>
             )
             const body = (
               <div className="cc-body">
@@ -108,31 +120,30 @@ function NicheSection({ niche }: { niche: Niche }) {
 }
 
 export default function PortfolioPage() {
-  useDocumentMeta(
-    'Projetos e Portfólio — Innova Tech',
-    'Conheça os projetos da Innova Tech por nicho: sites, redes MikroTik, desenvolvimento de software e branding entregues para nossos clientes.'
-  )
+  const { t } = useTranslation()
+  useDocumentMeta(t('meta.portfolio.title'), t('meta.portfolio.description'))
+  const niches = buildNiches(t('portfolioPage.niches', { returnObjects: true }) as NicheText[])
 
   return (
     <>
       <section className="pf-hero">
         <div className="wrap">
           <SectionLink id="portfolio" className="pf-back">
-            <i className="bi bi-arrow-left" /> Voltar
+            <i className="bi bi-arrow-left" /> {t('portfolioPage.back')}
           </SectionLink>
-          <h1>Projetos por <span className="grad-text">nicho.</span></h1>
-          <p>Separamos por área para você ver exatamente o que já fizemos parecido com o seu negócio. Em construção — mais projetos em breve.</p>
+          <h1>{t('portfolioPage.heading1')} <span className="grad-text">{t('portfolioPage.heading2')}</span></h1>
+          <p>{t('portfolioPage.lead')}</p>
         </div>
       </section>
 
-      {NICHES.map((n) => (
+      {niches.map((n) => (
         <NicheSection key={n.title} niche={n} />
       ))}
 
       <footer className="footer">
         <div className="wrap">
           <div className="footer-bottom" style={{ borderTop: 'none', paddingTop: 0 }}>
-            <p>© {new Date().getFullYear()} Innova Tech. Todos os direitos reservados.</p>
+            <p>{t('footer.copyright', { year: new Date().getFullYear() })}</p>
             <Link className="brand" to="/">
               <img className="brand-logo" src="/logo-corrida.png" alt="Innova Tech" width="50" height="26" style={{ height: 26 }} />
             </Link>

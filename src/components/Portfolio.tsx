@@ -1,4 +1,5 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import { useReveal } from "../hooks/useReveal";
 import libraImg from "../partners_assets/portfolio/libra_site.webp";
@@ -6,51 +7,20 @@ import plasaImg from "../partners_assets/portfolio/plasa_site.webp";
 import leoImg from "../partners_assets/portfolio/leo_branding.webp";
 import farmaImg from "../partners_assets/portfolio/farma_diagram.svg";
 
-const PROJECTS = [
-  {
-    span: "span4",
-    cat: "Landing Page",
-    img: libraImg,
-    title: "Libra Serv",
-    desc: "Landing page profissional moderna para empresa de serviços, design limpo, responsiva e focada em conversão.",
-    tags: ["Landing Page", "Responsivo", "SEO"],
-    href: "https://libraserv.com",
-    delay: "",
-  },
-  {
-    span: "span2",
-    cat: "Landing Page",
-    img: plasaImg,
-    title: "Plasa Consultoria",
-    desc: "Landing page profissional para consultoria com identidade visual marcante, navegação fluida, responsividade e alta conversão.",
-    tags: ["Landing Page", "Responsivo", "SEO"],
-    href: "https://plasaconsultoria.com.br",
-    delay: "d1",
-  },
-  {
-    span: "span3",
-    cat: "T.I., Infraestrutura",
-    img: farmaImg,
-    title: "Farmácia Homeopática Lençóis",
-    desc: "Rede corporativa em duas sedes conectadas via VPN MikroTik com firewall e monitoramento.",
-    tags: ["MikroTik", "VPN", "Firewall"],
-    href: "https://farmaciahomeopaticalencois.com.br",
-    delay: "",
-  },
-  {
-    span: "span3",
-    cat: "Logo, Branding",
-    img: leoImg,
-    title: "Leo's Tereré",
-    desc: "Identidade visual completa com logo e materiais digitais para marca de tereré de Lençóis Paulista.",
-    tags: ["Logo", "Branding", "Design"],
-    href: "https://www.instagram.com/leosterere/",
-    delay: "d1",
-  },
+const PROJECTS_META = [
+  { span: "span4", img: libraImg, title: "Libra Serv", href: "https://libraserv.com", delay: "" },
+  { span: "span2", img: plasaImg, title: "Plasa Consultoria", href: "https://plasaconsultoria.com.br", delay: "d1" },
+  { span: "span3", img: farmaImg, title: "Farmácia Homeopática Lençóis", href: "https://farmaciahomeopaticalencois.com.br", delay: "" },
+  { span: "span3", img: leoImg, title: "Leo's Tereré", href: "https://www.instagram.com/leosterere/", delay: "d1" },
 ];
 
+type ProjectText = { cat: string; desc: string; tags: string[] };
+
 export default function Portfolio() {
+  const { t } = useTranslation();
   const ref = useReveal();
+  const texts = t("portfolioHome.projects", { returnObjects: true }) as ProjectText[];
+  const PROJECTS = PROJECTS_META.map((p, i) => ({ ...p, ...texts[i] }));
 
   return (
     <section
@@ -61,7 +31,7 @@ export default function Portfolio() {
       <div className="wrap">
         <div className="section-head reveal">
           <h2>
-            O que entregamos <span className="grad-text">fala por nós.</span>
+            {t("portfolioHome.heading1")} <span className="grad-text">{t("portfolioHome.heading2")}</span>
           </h2>
         </div>
 
@@ -95,7 +65,7 @@ export default function Portfolio() {
         </div>
         <div style={{ textAlign: 'center', marginTop: 40 }} className="reveal">
           <Link className="btn btn-ghost" to="/portfolio">
-            Ver todos os projetos <i className="bi bi-arrow-right" />
+            {t("portfolioHome.viewAllButton")} <i className="bi bi-arrow-right" />
           </Link>
         </div>
       </div>

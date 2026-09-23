@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import SectionLink from "./SectionLink";
 
 export default function Footer() {
+  const { t } = useTranslation();
   const [year, setYear] = useState(2026);
   useEffect(() => setYear(new Date().getFullYear()), []);
 
@@ -23,15 +25,14 @@ export default function Footer() {
               />
             </SectionLink>
             <p className="fdesc">
-              Inovando o amanhã, hoje. Soluções de TI de alto nível para
-              empresas e pessoas da assistência ao código.
+              {t("footer.desc")}
             </p>
             <div className="socials">
               <a
                 href="https://www.instagram.com/innovatech.exe/"
                 target="_blank"
                 rel="noopener"
-                aria-label="Instagram"
+                aria-label={t("footer.socialAria.instagram") as string}
               >
                 <i className="bi bi-instagram" />
               </a>
@@ -39,13 +40,13 @@ export default function Footer() {
                 href="https://wa.me/5514998040306"
                 target="_blank"
                 rel="noopener"
-                aria-label="WhatsApp"
+                aria-label={t("footer.socialAria.whatsapp") as string}
               >
                 <i className="bi bi-whatsapp" />
               </a>
               <a
                 href="mailto:innovatech.assistencia@gmail.com"
-                aria-label="E-mail"
+                aria-label={t("footer.socialAria.email") as string}
               >
                 <i className="bi bi-envelope" />
               </a>
@@ -53,43 +54,36 @@ export default function Footer() {
           </div>
 
           <div className="fcol">
-            <h4>Serviços</h4>
+            <h4>{t("footer.servicesHeading")}</h4>
+            <ul>
+              {(t("footer.servicesItems", { returnObjects: true }) as string[]).map((item) => (
+                <li key={item}>
+                  <SectionLink id="servicos">{item}</SectionLink>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div className="fcol">
+            <h4>{t("footer.companyHeading")}</h4>
             <ul>
               <li>
-                <SectionLink id="servicos">Assistência Técnica</SectionLink>
+                <Link to="/portfolio">{t("footer.companyItems.projects")}</Link>
               </li>
               <li>
-                <SectionLink id="servicos">Suporte Remoto</SectionLink>
+                <SectionLink id="processo">{t("footer.companyItems.howWeWork")}</SectionLink>
               </li>
               <li>
-                <SectionLink id="servicos">Redes & Infraestrutura</SectionLink>
+                <SectionLink id="numeros">{t("footer.companyItems.numbers")}</SectionLink>
               </li>
               <li>
-                <SectionLink id="servicos">Desenvolvimento</SectionLink>
+                <SectionLink id="planos">{t("footer.companyItems.plans")}</SectionLink>
               </li>
             </ul>
           </div>
 
           <div className="fcol">
-            <h4>Empresa</h4>
-            <ul>
-              <li>
-                <Link to="/portfolio">Projetos</Link>
-              </li>
-              <li>
-                <SectionLink id="processo">Como trabalhamos</SectionLink>
-              </li>
-              <li>
-                <SectionLink id="numeros">Em números</SectionLink>
-              </li>
-              <li>
-                <SectionLink id="planos">Planos</SectionLink>
-              </li>
-            </ul>
-          </div>
-
-          <div className="fcol">
-            <h4>Contato</h4>
+            <h4>{t("footer.contactHeading")}</h4>
             <ul>
               <li>
                 <a
@@ -97,12 +91,12 @@ export default function Footer() {
                   target="_blank"
                   rel="noopener"
                 >
-                  <i className="bi bi-whatsapp" /> WhatsApp
+                  <i className="bi bi-whatsapp" /> {t("footer.contactItems.whatsapp")}
                 </a>
               </li>
               <li>
                 <a href="mailto:innovatech.assistencia@gmail.com">
-                  <i className="bi bi-envelope" /> E-mail
+                  <i className="bi bi-envelope" /> {t("footer.contactItems.email")}
                 </a>
               </li>
               <li>
@@ -111,7 +105,7 @@ export default function Footer() {
                   target="_blank"
                   rel="noopener"
                 >
-                  <i className="bi bi-instagram" /> Instagram
+                  <i className="bi bi-instagram" /> {t("footer.contactItems.instagram")}
                 </a>
               </li>
             </ul>
@@ -119,8 +113,8 @@ export default function Footer() {
         </div>
 
         <div className="footer-bottom">
-          <p>© {year} Innova Tech. Todos os direitos reservados.</p>
-          <p className="tag">"Inovando o amanhã, hoje."</p>
+          <p>{t("footer.copyright", { year })}</p>
+          <p className="tag">{t("footer.tagline")}</p>
         </div>
       </div>
     </footer>
