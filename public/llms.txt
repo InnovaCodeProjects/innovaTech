@@ -1,0 +1,18 @@
+# Innova Tech
+
+> Innova Tech é uma empresa de tecnologia especializada em assistência técnica, suporte remoto, redes e infraestrutura MikroTik, e desenvolvimento de software sob medida. Diagnóstico gratuito.
+
+## Site
+
+- [Página inicial](https://innovatech.com.br/): Visão geral dos serviços, planos e formas de contato da Innova Tech.
+- [Serviços](https://innovatech.com.br/#servicos): Assistência técnica, suporte remoto, redes MikroTik e desenvolvimento de software.
+- [Portfólio](https://innovatech.com.br/portfolio): Projetos e clientes atendidos pela Innova Tech.
+- [Planos e preços](https://innovatech.com.br/#planos): Tabela de planos de assistência técnica e suporte.
+
+## Contato
+
+- [WhatsApp](https://wa.me/5514998040306): Canal principal de atendimento e orçamento.
+
+## Optional
+
+- [Sitemap](https://innovatech.com.br/sitemap.xml): Mapa completo das páginas do site.

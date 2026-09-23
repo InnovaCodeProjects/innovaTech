@@ -4,6 +4,14 @@
    ============================================================ */
 @import "bootstrap-icons/font/bootstrap-icons.css";
 
+/* Override bundled font-display: block (causes FOIT and delays FCP) */
+@font-face {
+  font-display: swap;
+  font-family: "bootstrap-icons";
+  src: url("bootstrap-icons/font/fonts/bootstrap-icons.woff2?e34853135f9e39acf64315236852cd5a") format("woff2"),
+    url("bootstrap-icons/font/fonts/bootstrap-icons.woff?e34853135f9e39acf64315236852cd5a") format("woff");
+}
+
 /* ---------- Theme tokens ---------- */
 :root {
   --bg: #0a0a0f;
@@ -501,11 +509,13 @@ section {
   top: 0;
   left: 0;
   height: 2px;
-  width: 0;
+  width: 100%;
   z-index: 200;
   background: var(--grad);
   box-shadow: 0 0 10px var(--glow);
-  transition: width 0.12s linear;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.12s linear;
 }
 
 /* ---------- Scroll-linked background ----------

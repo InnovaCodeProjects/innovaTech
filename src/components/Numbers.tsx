@@ -84,7 +84,7 @@ export default function Numbers() {
         <div className="marquee-track">
           {doubled.map((client, i) => (
             <span key={i} className="client2">
-              <img className="client-logo" src={client.src} alt={client.alt} loading="lazy" decoding="async" />
+              <img className="client-logo" src={client.src} alt={client.alt} width="140" height="40" loading="lazy" decoding="async" />
             </span>
           ))}
         </div>

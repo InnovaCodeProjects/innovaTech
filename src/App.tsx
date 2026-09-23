@@ -1,10 +1,11 @@
-import { useEffect } from 'react'
+import { useEffect, lazy, Suspense } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Routes, Route, useLocation, useNavigate } from 'react-router-dom'
 import Navbar from './components/Navbar'
 import WhatsAppButton from './components/WhatsAppButton'
 import Home from './pages/Home'
-import PortfolioPage from './pages/Portfolio'
+
+const PortfolioPage = lazy(() => import('./pages/Portfolio'))
 
 function ScrollManager() {
   const location = useLocation()
@@ -38,7 +39,8 @@ export default function App() {
     const onScroll = () => {
       const h = document.documentElement
       const max = h.scrollHeight - h.clientHeight
-      if (bar) bar.style.width = (max > 0 ? (h.scrollTop / max) * 100 : 0) + '%'
+      const pct = max > 0 ? h.scrollTop / max : 0
+      if (bar) bar.style.transform = `scaleX(${pct})`
     }
     window.addEventListener('scroll', onScroll, { passive: true })
     onScroll()
@@ -50,10 +52,12 @@ export default function App() {
       <ScrollManager />
       <div className="scrollbar" id="scrollbar" />
       <Navbar />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/portfolio" element={<PortfolioPage />} />
-      </Routes>
+      <Suspense fallback={null}>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/portfolio" element={<PortfolioPage />} />
+        </Routes>
+      </Suspense>
       <WhatsAppButton />
     </>
   )

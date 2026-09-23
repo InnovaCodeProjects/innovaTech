@@ -21,7 +21,7 @@ export default function Hero() {
         alt=""
         aria-hidden="true"
         decoding="async"
-        {...({ fetchpriority: 'low' } as React.ImgHTMLAttributes<HTMLImageElement>)}
+        {...({ fetchpriority: 'high' } as React.ImgHTMLAttributes<HTMLImageElement>)}
       />
 
       <div className="wrap hero-inner">
