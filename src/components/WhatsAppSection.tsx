@@ -103,7 +103,6 @@ export default function WhatsAppSection() {
     >
       <div className="wrap wa-inner">
         <div className="wa-copy reveal">
-          <span className="eyebrow"><span className="idx">02</span> Atendimento de verdade</span>
           <h2>Seu problema resolvido <span className="grad-text">na conversa.</span></h2>
           <p>Sem formulário, sem espera, sem robô. Você manda uma mensagem e fala direto com quem entende. Diagnóstico na hora, pelo WhatsApp.</p>
 

@@ -127,9 +127,6 @@ export default function Terminal() {
         </div>
 
         <div className="term-copy reveal d1">
-          <span className="eyebrow">
-            <span className="idx">04</span> Desenvolvimento
-          </span>
           <h2>
             Do diagnóstico <span className="grad-text">ao deploy.</span>
           </h2>

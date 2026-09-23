@@ -15,8 +15,8 @@ export default function Manifesto() {
       <div className="glow" />
       <div className="wrap manifesto-inner reveal">
         <blockquote>
-          Não somos o T.I. de ninguém. <span className="mut">Somos uma</span>{" "}
-          solução <span className="mut">com</span> propósito de inovação.
+          Muito além do T.I. somos uma <span className="mut">solução</span> com
+          propósito de <span className="mut">inovação</span>
         </blockquote>
         <p className="sig">— Innova Tech · Inovando o amanhã, hoje</p>
       </div>

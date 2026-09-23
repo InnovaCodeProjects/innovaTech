@@ -106,9 +106,6 @@ export default function Pricing() {
               textAlign: "center",
             }}
           >
-            <span className="eyebrow" style={{ justifyContent: "center" }}>
-              <span className="idx">07</span> Transparência total
-            </span>
             <h2>
               Preços claros, <span className="grad-text">sem surpresas.</span>
             </h2>

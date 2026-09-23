@@ -35,7 +35,6 @@ export default function Process() {
     >
       <div className="wrap">
         <div className="section-head reveal">
-          <span className="eyebrow"><span className="idx">05</span> Como trabalhamos</span>
           <h2>Um processo que dá <span className="grad-text">segurança.</span></h2>
         </div>
         <div className="proc reveal">

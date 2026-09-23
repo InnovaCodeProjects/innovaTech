@@ -1,4 +1,6 @@
 import { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
+import SectionLink from './SectionLink'
 
 export default function Footer() {
   const [year, setYear] = useState(2026)
@@ -9,10 +11,9 @@ export default function Footer() {
       <div className="wrap">
         <div className="footer-grid">
           <div>
-            <a href="#topo" className="brand">
-              <span className="mark"><img src="/mark-white.png" alt="" /></span>
-              <span className="name">INNOVA<b>TECH</b></span>
-            </a>
+            <SectionLink id="topo" className="brand">
+              <img className="brand-logo" src="/logo-corrida.webp" alt="Innova Tech" width="62" height="32" loading="lazy" decoding="async" />
+            </SectionLink>
             <p className="fdesc">
               Inovando o amanhã, hoje. Soluções de TI de alto nível para empresas e pessoas — da assistência ao código.
             </p>
@@ -32,20 +33,20 @@ export default function Footer() {
           <div className="fcol">
             <h4>Serviços</h4>
             <ul>
-              <li><a href="#servicos">Assistência Técnica</a></li>
-              <li><a href="#servicos">Suporte Remoto</a></li>
-              <li><a href="#servicos">Redes & Infraestrutura</a></li>
-              <li><a href="#servicos">Desenvolvimento</a></li>
+              <li><SectionLink id="servicos">Assistência Técnica</SectionLink></li>
+              <li><SectionLink id="servicos">Suporte Remoto</SectionLink></li>
+              <li><SectionLink id="servicos">Redes & Infraestrutura</SectionLink></li>
+              <li><SectionLink id="servicos">Desenvolvimento</SectionLink></li>
             </ul>
           </div>
 
           <div className="fcol">
             <h4>Empresa</h4>
             <ul>
-              <li><a href="#portfolio">Projetos</a></li>
-              <li><a href="#processo">Como trabalhamos</a></li>
-              <li><a href="#numeros">Em números</a></li>
-              <li><a href="#planos">Planos</a></li>
+              <li><Link to="/portfolio">Projetos</Link></li>
+              <li><SectionLink id="processo">Como trabalhamos</SectionLink></li>
+              <li><SectionLink id="numeros">Em números</SectionLink></li>
+              <li><SectionLink id="planos">Planos</SectionLink></li>
             </ul>
           </div>
 

@@ -1,5 +1,16 @@
 import React, { useEffect, useRef } from 'react'
 import { useReveal } from '../hooks/useReveal'
+import libraLogo from '../partners_assets/logos/libra.webp'
+import plasaLogo from '../partners_assets/logos/plasa.webp'
+import farmaciaLogo from '../partners_assets/logos/farmacia.webp'
+import leoLogo from '../partners_assets/logos/leo.webp'
+
+const CLIENTS = [
+  { src: libraLogo, alt: 'Libra Serv' },
+  { src: plasaLogo, alt: 'Plasa Consultoria' },
+  { src: farmaciaLogo, alt: 'Farmácia Homeopática Lençóis' },
+  { src: leoLogo, alt: "Leo's Tereré" },
+]
 
 type Stat = {
   count: number
@@ -55,16 +66,29 @@ export default function Numbers() {
     return () => observer.disconnect()
   }, [])
 
+  const doubled = [...CLIENTS, ...CLIENTS, ...CLIENTS, ...CLIENTS]
+
   return (
     <section
-      className="numbers"
+      className="numbers alt"
       id="numeros"
       ref={sectionRef as React.RefObject<HTMLElement>}
     >
-      <img className="wm-numbers" src="/mark-white.png" alt="" aria-hidden="true" />
+      <img className="wm-numbers" src="/mark-white.png" alt="" aria-hidden="true" loading="lazy" decoding="async" />
       <div className="wrap">
-        <span className="numbers-head reveal">Prova, não promessa</span>
-        <div className="stats-row">
+        <p className="marquee-label reveal">Empresas que já confiaram no nosso trabalho</p>
+      </div>
+      <div className="marquee">
+        <div className="marquee-track">
+          {doubled.map((client, i) => (
+            <span key={i} className="client2">
+              <img className="client-logo" src={client.src} alt={client.alt} loading="lazy" decoding="async" />
+            </span>
+          ))}
+        </div>
+      </div>
+      <div className="wrap">
+        <div className="stats-row" style={{ marginTop: 52 }}>
           {STATS.map((s) => (
             <div key={s.label} className={`stat2 reveal${s.delay ? ' ' + s.delay : ''}`}>
               <div

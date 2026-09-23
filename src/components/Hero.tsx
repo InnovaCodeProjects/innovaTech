@@ -1,5 +1,6 @@
 import React from 'react'
 import { useReveal } from '../hooks/useReveal'
+import SectionLink from './SectionLink'
 
 export default function Hero() {
   const ref = useReveal()
@@ -10,16 +11,13 @@ export default function Hero() {
       id="inicio"
       ref={ref as React.RefObject<HTMLElement>}
     >
-      <img className="hero-mark" src="/mark-white.png" alt="" aria-hidden="true" />
+      <img className="hero-mark" src="/mark-white.png" alt="" aria-hidden="true" fetchPriority="low" decoding="async" />
 
       <div className="wrap hero-inner">
         <div className="hero-copy">
-          <span className="hero-kicker">Innova Tech · soluções em tecnologia</span>
-
           <h1 className="hero-title">
-            <span className="ln"><span>Movemos a tecnologia</span></span>
-            <span className="ln"><span>ao seu redor —</span></span>
-            <span className="ln"><span className="grad-text">você só avança.</span></span>
+            <span className="ln"><span>Movemos a tecnologia ao seu redor</span></span>
+            <span className="ln grad-text"><span>você só avança.</span></span>
           </h1>
 
           <p className="hero-lead reveal d3">
@@ -37,9 +35,9 @@ export default function Hero() {
               <i className="bi bi-whatsapp" />
               Falar no WhatsApp
             </a>
-            <a className="btn btn-ghost" href="#portfolio">
+            <SectionLink id="portfolio" className="btn btn-ghost">
               Ver projetos <i className="bi bi-arrow-right" />
-            </a>
+            </SectionLink>
           </div>
 
           <ul className="hero-trust reveal d4">
