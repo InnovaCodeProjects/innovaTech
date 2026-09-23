@@ -134,7 +134,7 @@ export default function PortfolioPage() {
           <div className="footer-bottom" style={{ borderTop: 'none', paddingTop: 0 }}>
             <p>© {new Date().getFullYear()} Innova Tech. Todos os direitos reservados.</p>
             <Link className="brand" to="/">
-              <img className="brand-logo" src="/logo-corrida.webp" alt="Innova Tech" width="50" height="26" style={{ height: 26 }} />
+              <img className="brand-logo" src="/logo-corrida.png" alt="Innova Tech" width="50" height="26" style={{ height: 26 }} />
             </Link>
           </div>
         </div>

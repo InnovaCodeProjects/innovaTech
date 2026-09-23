@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef, type ImgHTMLAttributes } from 'react'
 import { Link } from 'react-router-dom'
 import SectionLink from './SectionLink'
 
@@ -64,7 +64,15 @@ export default function Navbar() {
           </nav>
 
           <SectionLink id="topo" className="brand">
-            <img className="brand-logo" src="/logo-corrida.webp" alt="Innova Tech" width="73" height="38" fetchPriority="high" decoding="async" />
+            <img
+              className="brand-logo"
+              src="/logo-corrida.png"
+              alt="Innova Tech"
+              width="73"
+              height="38"
+              decoding="async"
+              {...({ fetchpriority: 'high' } as ImgHTMLAttributes<HTMLImageElement>)}
+            />
           </SectionLink>
 
           <div className="nav-cta">

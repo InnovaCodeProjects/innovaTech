@@ -1,10 +1,10 @@
-import { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
-import SectionLink from './SectionLink'
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import SectionLink from "./SectionLink";
 
 export default function Footer() {
-  const [year, setYear] = useState(2026)
-  useEffect(() => setYear(new Date().getFullYear()), [])
+  const [year, setYear] = useState(2026);
+  useEffect(() => setYear(new Date().getFullYear()), []);
 
   return (
     <footer className="footer">
@@ -12,19 +12,41 @@ export default function Footer() {
         <div className="footer-grid">
           <div>
             <SectionLink id="topo" className="brand">
-              <img className="brand-logo" src="/logo-corrida.webp" alt="Innova Tech" width="62" height="32" loading="lazy" decoding="async" />
+              <img
+                className="brand-logo"
+                src="/logo-corrida.png"
+                alt="Innova Tech"
+                width="62"
+                height="32"
+                loading="lazy"
+                decoding="async"
+              />
             </SectionLink>
             <p className="fdesc">
-              Inovando o amanhã, hoje. Soluções de TI de alto nível para empresas e pessoas — da assistência ao código.
+              Inovando o amanhã, hoje. Soluções de TI de alto nível para
+              empresas e pessoas da assistência ao código.
             </p>
             <div className="socials">
-              <a href="https://www.instagram.com/innovatech.exe/" target="_blank" rel="noopener" aria-label="Instagram">
+              <a
+                href="https://www.instagram.com/innovatech.exe/"
+                target="_blank"
+                rel="noopener"
+                aria-label="Instagram"
+              >
                 <i className="bi bi-instagram" />
               </a>
-              <a href="https://wa.me/5514998040306" target="_blank" rel="noopener" aria-label="WhatsApp">
+              <a
+                href="https://wa.me/5514998040306"
+                target="_blank"
+                rel="noopener"
+                aria-label="WhatsApp"
+              >
                 <i className="bi bi-whatsapp" />
               </a>
-              <a href="mailto:innovatech.assistencia@gmail.com" aria-label="E-mail">
+              <a
+                href="mailto:innovatech.assistencia@gmail.com"
+                aria-label="E-mail"
+              >
                 <i className="bi bi-envelope" />
               </a>
             </div>
@@ -33,20 +55,36 @@ export default function Footer() {
           <div className="fcol">
             <h4>Serviços</h4>
             <ul>
-              <li><SectionLink id="servicos">Assistência Técnica</SectionLink></li>
-              <li><SectionLink id="servicos">Suporte Remoto</SectionLink></li>
-              <li><SectionLink id="servicos">Redes & Infraestrutura</SectionLink></li>
-              <li><SectionLink id="servicos">Desenvolvimento</SectionLink></li>
+              <li>
+                <SectionLink id="servicos">Assistência Técnica</SectionLink>
+              </li>
+              <li>
+                <SectionLink id="servicos">Suporte Remoto</SectionLink>
+              </li>
+              <li>
+                <SectionLink id="servicos">Redes & Infraestrutura</SectionLink>
+              </li>
+              <li>
+                <SectionLink id="servicos">Desenvolvimento</SectionLink>
+              </li>
             </ul>
           </div>
 
           <div className="fcol">
             <h4>Empresa</h4>
             <ul>
-              <li><Link to="/portfolio">Projetos</Link></li>
-              <li><SectionLink id="processo">Como trabalhamos</SectionLink></li>
-              <li><SectionLink id="numeros">Em números</SectionLink></li>
-              <li><SectionLink id="planos">Planos</SectionLink></li>
+              <li>
+                <Link to="/portfolio">Projetos</Link>
+              </li>
+              <li>
+                <SectionLink id="processo">Como trabalhamos</SectionLink>
+              </li>
+              <li>
+                <SectionLink id="numeros">Em números</SectionLink>
+              </li>
+              <li>
+                <SectionLink id="planos">Planos</SectionLink>
+              </li>
             </ul>
           </div>
 
@@ -54,7 +92,11 @@ export default function Footer() {
             <h4>Contato</h4>
             <ul>
               <li>
-                <a href="https://wa.me/5514998040306" target="_blank" rel="noopener">
+                <a
+                  href="https://wa.me/5514998040306"
+                  target="_blank"
+                  rel="noopener"
+                >
                   <i className="bi bi-whatsapp" /> WhatsApp
                 </a>
               </li>
@@ -64,7 +106,11 @@ export default function Footer() {
                 </a>
               </li>
               <li>
-                <a href="https://www.instagram.com/innovatech.exe/" target="_blank" rel="noopener">
+                <a
+                  href="https://www.instagram.com/innovatech.exe/"
+                  target="_blank"
+                  rel="noopener"
+                >
                   <i className="bi bi-instagram" /> Instagram
                 </a>
               </li>
@@ -78,5 +124,5 @@ export default function Footer() {
         </div>
       </div>
     </footer>
-  )
+  );
 }

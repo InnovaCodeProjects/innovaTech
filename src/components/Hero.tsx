@@ -11,7 +11,14 @@ export default function Hero() {
       id="inicio"
       ref={ref as React.RefObject<HTMLElement>}
     >
-      <img className="hero-mark" src="/mark-white.png" alt="" aria-hidden="true" fetchPriority="low" decoding="async" />
+      <img
+        className="hero-mark"
+        src="/mark-white.png"
+        alt=""
+        aria-hidden="true"
+        decoding="async"
+        {...({ fetchpriority: 'low' } as React.ImgHTMLAttributes<HTMLImageElement>)}
+      />
 
       <div className="wrap hero-inner">
         <div className="hero-copy">
