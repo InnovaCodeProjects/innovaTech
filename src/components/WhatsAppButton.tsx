@@ -1,4 +1,5 @@
 import { useTranslation } from 'react-i18next'
+import Icon from './Icon'
 import { waLink } from '../utils/format'
 
 export default function WhatsAppButton() {
@@ -11,7 +12,7 @@ export default function WhatsAppButton() {
       rel="noopener"
       aria-label={t('whatsappButton.aria') as string}
     >
-      <i className="bi bi-whatsapp" />
+      <Icon name="whatsapp" />
     </a>
   )
 }

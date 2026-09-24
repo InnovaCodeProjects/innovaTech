@@ -1,5 +1,5 @@
 import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
+import { createRoot, hydrateRoot } from 'react-dom/client'
 import { BrowserRouter } from 'react-router-dom'
 import './index.css'
 import './i18n'
@@ -9,10 +9,20 @@ if ('scrollRestoration' in window.history) {
   window.history.scrollRestoration = 'manual'
 }
 
-createRoot(document.getElementById('root')!).render(
+const container = document.getElementById('root')!
+
+const tree = (
   <StrictMode>
     <BrowserRouter>
       <App />
     </BrowserRouter>
-  </StrictMode>,
+  </StrictMode>
 )
+
+// Pages are prerendered at build time (scripts/prerender.mjs). Hydrate that
+// markup when it's there; fall back to a client render if it isn't.
+if (container.firstElementChild) {
+  hydrateRoot(container, tree)
+} else {
+  createRoot(container).render(tree)
+}

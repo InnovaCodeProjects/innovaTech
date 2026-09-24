@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef, type ImgHTMLAttributes } from 'react'
+import Icon from './Icon'
 import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
 import SectionLink from './SectionLink'
@@ -117,7 +118,7 @@ export default function Navbar() {
               aria-expanded={menuOpen}
               onClick={() => setMenuOpen((o) => !o)}
             >
-              <i className={menuOpen ? 'bi bi-x-lg' : 'bi bi-list'} />
+              <Icon name={menuOpen ? 'x-lg' : 'list'} />
             </button>
           </div>
         </div>
@@ -149,7 +150,7 @@ export default function Navbar() {
             rel="noopener"
             onClick={close}
           >
-            <i className="bi bi-whatsapp" />
+            <Icon name="whatsapp" />
             {t('nav.waButton')}
           </a>
         </div>

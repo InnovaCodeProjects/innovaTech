@@ -1,4 +1,5 @@
 import React from "react";
+import Icon from './Icon'
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import { useReveal } from "../hooks/useReveal";
@@ -48,7 +49,7 @@ export default function Portfolio() {
                 <span className="pf-cat">{p.cat}</span>
                 <img src={p.img} alt={p.title} width="600" height="380" loading="lazy" decoding="async" />
                 <span className="pf-arrow">
-                  <i className="bi bi-arrow-up-right" />
+                  <Icon name="arrow-up-right" />
                 </span>
               </div>
               <div className="pf-body">
@@ -65,7 +66,7 @@ export default function Portfolio() {
         </div>
         <div style={{ textAlign: 'center', marginTop: 40 }} className="reveal">
           <Link className="btn btn-ghost" to="/portfolio">
-            {t("portfolioHome.viewAllButton")} <i className="bi bi-arrow-right" />
+            {t("portfolioHome.viewAllButton")} <Icon name="arrow-right" />
           </Link>
         </div>
       </div>

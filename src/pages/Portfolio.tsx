@@ -1,4 +1,5 @@
 import { useRef } from 'react'
+import Icon from '../components/Icon'
 import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
 import { useDocumentMeta } from '../hooks/useDocumentMeta'
@@ -81,10 +82,10 @@ function NicheSection({ niche }: { niche: Niche }) {
           <h2>{niche.title}</h2>
           <div className="niche-nav">
             <button aria-label={t('portfolioPage.prevAria') as string} onClick={() => scroll(-1)}>
-              <i className="bi bi-arrow-left" />
+              <Icon name="arrow-left" />
             </button>
             <button aria-label={t('portfolioPage.nextAria') as string} onClick={() => scroll(1)}>
-              <i className="bi bi-arrow-right" />
+              <Icon name="arrow-right" />
             </button>
           </div>
         </div>
@@ -129,7 +130,7 @@ export default function PortfolioPage() {
       <section className="pf-hero">
         <div className="wrap">
           <SectionLink id="portfolio" className="pf-back">
-            <i className="bi bi-arrow-left" /> {t('portfolioPage.back')}
+            <Icon name="arrow-left" /> {t('portfolioPage.back')}
           </SectionLink>
           <h1>{t('portfolioPage.heading1')} <span className="grad-text">{t('portfolioPage.heading2')}</span></h1>
           <p>{t('portfolioPage.lead')}</p>

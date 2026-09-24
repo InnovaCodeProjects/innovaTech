@@ -1,0 +1,46 @@
+# A Hostinger compila sozinha a cada push na main (preset Vite, `npm run
+# build`, saída `dist/`). Este workflow roda o mesmo build antes do merge, para
+# que um erro apareça no PR em vez de derrubar o site em produção.
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main, develop]
+
+jobs:
+  build:
+    name: Typecheck e build
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      # Mesma versão que a Hostinger usa para compilar em produção, para que
+      # uma falha aqui signifique uma falha lá — e vice-versa.
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+
+      # `npm run build` já roda o tsc, o build do cliente, o build SSR e o
+      # prerender — se qualquer um quebrar, o PR falha aqui e não em produção.
+      - run: npm run build
+
+      - name: Conferir que o prerender gerou as duas páginas
+        run: |
+          test -s dist/index.html
+          test -s dist/portfolio/index.html
+          grep -q '<div id="root"><' dist/index.html
+          grep -q '<div id="root"><' dist/portfolio/index.html
+          echo "OK: páginas pré-renderizadas com markup"
+
+      - name: Conferir os arquivos de descoberta
+        run: |
+          test -s dist/.htaccess
+          test -s dist/robots.txt
+          test -s dist/sitemap.xml
+          node -e "const c=require('./dist/.well-known/ard.json'); if(!c.entries?.length) throw new Error('ard.json sem entries')"
+          echo "OK: .htaccess, robots, sitemap e ard.json presentes"

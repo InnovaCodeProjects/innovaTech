@@ -1,9 +1,10 @@
 import React from "react";
+import Icon, { type IconName } from './Icon'
 import { useTranslation } from "react-i18next";
 import { useReveal } from "../hooks/useReveal";
 import { waLink } from "../utils/format";
 
-const ICONS = ["bi-tools", "bi-headset", "bi-hdd-network", "bi-code-slash", "bi-palette2"];
+const ICONS: IconName[] = ["tools", "headset", "hdd-network", "code-slash", "palette2"];
 const DELAYS = ["d1", "d2", "d3", "d4", "d5"];
 
 type ServiceItem = { title: string; detail: string; waMessage: string };
@@ -60,7 +61,7 @@ export default function Services() {
               >
                 <div className={`flow-node-inner reveal ${DELAYS[i]}`}>
                   <span className="fi">
-                    <i className={`bi ${s.icon}`} />
+                    <Icon name={s.icon} />
                   </span>
                   <h3>{s.title}</h3>
                   <p>{s.detail}</p>

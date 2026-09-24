@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import Icon from './Icon'
 import { useTranslation } from "react-i18next";
 import { useReveal } from "../hooks/useReveal";
 import { formatBRL, waLink } from "../utils/format";
@@ -103,7 +104,7 @@ export default function Pricing() {
           </div>
 
           <div className="price-banner reveal">
-            <i className="bi bi-check-circle" />
+            <Icon name="check-circle" />
             {t("pricing.banner")}
           </div>
 
@@ -114,7 +115,7 @@ export default function Pricing() {
                 className={`price${p.feat ? " feat" : ""} reveal${p.delay ? " " + p.delay : ""}`}
               >
                 <div className="pt">
-                  <h4>{p.title}</h4>
+                  <h3>{p.title}</h3>
                   <span className="pv">{p.value}</span>
                 </div>
                 <p>{p.desc}</p>
@@ -130,7 +131,7 @@ export default function Pricing() {
               className="price-catalog-btn"
               onClick={() => setPdfOpen(true)}
             >
-              <i className="bi bi-file-earmark-pdf" />
+              <Icon name="file-earmark-pdf" />
               {t("pricing.catalogButton")}
             </button>
           </div>
@@ -194,7 +195,7 @@ export default function Pricing() {
               target="_blank"
               rel="noopener"
             >
-              <i className="bi bi-whatsapp" />
+              <Icon name="whatsapp" />
               {t("pricing.ctaButton")}
             </a>
           </div>
@@ -211,7 +212,7 @@ export default function Pricing() {
                 onClick={() => setPdfOpen(false)}
                 aria-label={t("pricing.modalClose") as string}
               >
-                <i className="bi bi-x-lg" />
+                <Icon name="x-lg" />
               </button>
             </div>
             <iframe

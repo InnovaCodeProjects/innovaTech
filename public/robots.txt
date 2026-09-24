@@ -1,5 +1,8 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://innovatech.com.br/sitemap.xml
-Agentmap: https://innovatech.com.br/.well-known/ard.json
+# Agent discovery: /.well-known/ard.json, also linked from <head> as rel="ard".
+# Not declared here as an "Agentmap:" directive — it isn't a registered
+# robots.txt directive and parsers report it as invalid.
+
+Sitemap: https://www.innovatech.dev.br/sitemap.xml
