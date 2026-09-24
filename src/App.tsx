@@ -4,6 +4,7 @@ import { Routes, Route, useLocation, useNavigate } from 'react-router-dom'
 import Navbar from './components/Navbar'
 import WhatsAppButton from './components/WhatsAppButton'
 import Home from './pages/Home'
+import { detectLanguage } from './i18n'
 
 const PortfolioPage = lazy(() => import('./pages/Portfolio'))
 
@@ -29,6 +30,12 @@ function ScrollManager() {
 
 export default function App() {
   const { i18n } = useTranslation()
+
+  // Runs after hydration commits: switching language any earlier would make
+  // the first client render disagree with the prerendered (pt) markup.
+  useEffect(() => {
+    detectLanguage()
+  }, [])
 
   useEffect(() => {
     document.documentElement.lang = i18n.language

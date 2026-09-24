@@ -4,10 +4,10 @@
 
 ## Site
 
-- [Página inicial](https://innovatech.com.br/): Visão geral dos serviços, planos e formas de contato da Innova Tech.
-- [Serviços](https://innovatech.com.br/#servicos): Assistência técnica, suporte remoto, redes MikroTik e desenvolvimento de software.
-- [Portfólio](https://innovatech.com.br/portfolio): Projetos e clientes atendidos pela Innova Tech.
-- [Planos e preços](https://innovatech.com.br/#planos): Tabela de planos de assistência técnica e suporte.
+- [Página inicial](https://www.innovatech.dev.br/): Visão geral dos serviços, planos e formas de contato da Innova Tech.
+- [Serviços](https://www.innovatech.dev.br/#servicos): Assistência técnica, suporte remoto, redes MikroTik e desenvolvimento de software.
+- [Portfólio](https://www.innovatech.dev.br/portfolio): Projetos e clientes atendidos pela Innova Tech.
+- [Planos e preços](https://www.innovatech.dev.br/#planos): Tabela de planos de assistência técnica e suporte.
 
 ## Contato
 
@@ -15,4 +15,4 @@
 
 ## Optional
 
-- [Sitemap](https://innovatech.com.br/sitemap.xml): Mapa completo das páginas do site.
+- [Sitemap](https://www.innovatech.dev.br/sitemap.xml): Mapa completo das páginas do site.

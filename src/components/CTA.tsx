@@ -1,4 +1,5 @@
 import React from 'react'
+import Icon from './Icon'
 import { useTranslation } from 'react-i18next'
 import { useReveal } from '../hooks/useReveal'
 import { waLink } from '../utils/format'
@@ -27,14 +28,14 @@ export default function CTA() {
                 target="_blank"
                 rel="noopener"
               >
-                <i className="bi bi-whatsapp" />
+                <Icon name="whatsapp" />
                 {t('cta.waButton')}
               </a>
               <a
                 className="btn btn-ghost"
                 href={`mailto:innovatech.assistencia@gmail.com?subject=${encodeURIComponent(t('cta.emailSubject'))}`}
               >
-                <i className="bi bi-envelope" />
+                <Icon name="envelope" />
                 {t('cta.emailButton')}
               </a>
             </div>

@@ -1,4 +1,5 @@
 import React from 'react'
+import Icon from './Icon'
 import { useTranslation } from 'react-i18next'
 import { useReveal } from '../hooks/useReveal'
 import SectionLink from './SectionLink'
@@ -15,14 +16,7 @@ export default function Hero() {
       id="inicio"
       ref={ref as React.RefObject<HTMLElement>}
     >
-      <img
-        className="hero-mark"
-        src="/mark-white.png"
-        alt=""
-        aria-hidden="true"
-        decoding="async"
-        {...({ fetchpriority: 'high' } as React.ImgHTMLAttributes<HTMLImageElement>)}
-      />
+      <div className="hero-mark" aria-hidden="true" />
 
       <div className="wrap hero-inner">
         <div className="hero-copy">
@@ -42,17 +36,17 @@ export default function Hero() {
               target="_blank"
               rel="noopener"
             >
-              <i className="bi bi-whatsapp" />
+              <Icon name="whatsapp" />
               {t('hero.waButton')}
             </a>
             <SectionLink id="portfolio" className="btn btn-ghost">
-              {t('hero.viewProjects')} <i className="bi bi-arrow-right" />
+              {t('hero.viewProjects')} <Icon name="arrow-right" />
             </SectionLink>
           </div>
 
           <ul className="hero-trust reveal d4">
             {trust.map((item) => (
-              <li key={item}><span className="tick"><i className="bi bi-check-lg" /></span>{item}</li>
+              <li key={item}><span className="tick"><Icon name="check-lg" /></span>{item}</li>
             ))}
           </ul>
         </div>

@@ -1,4 +1,3 @@
-import { motion } from 'framer-motion'
 import { useTranslation } from 'react-i18next'
 import { useScrollBackground } from '../hooks/useScrollBackground'
 import { useDocumentMeta } from '../hooks/useDocumentMeta'
@@ -28,11 +27,11 @@ const BG_ZONES = [
 export default function Home() {
   const { t } = useTranslation()
   useDocumentMeta(t('meta.home.title'), t('meta.home.description'))
-  const bg = useScrollBackground(BG_ZONES)
+  const bgRef = useScrollBackground(BG_ZONES)
 
   return (
     <>
-      <motion.div className="scroll-bg" style={{ background: bg }} aria-hidden="true" />
+      <div className="scroll-bg" ref={bgRef} aria-hidden="true" />
       <main id="topo">
         <Hero />
         <Services />

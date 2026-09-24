@@ -1,3 +1,72 @@
 {
-  "entries": []
+  "entries": [
+    {
+      "@context": "https://agenticresourcediscovery.org/context/v1",
+      "identifier": "urn:air:innovatech.dev.br:site:innovatech",
+      "displayName": "Innova Tech",
+      "type": "text/markdown",
+      "url": "https://www.innovatech.dev.br/llms.txt",
+      "description": "Empresa brasileira de tecnologia em Lençóis Paulista (SP): assistência técnica em computadores e notebooks, suporte remoto, redes e infraestrutura MikroTik, desenvolvimento de software sob medida e identidade visual. Diagnóstico gratuito pelo WhatsApp.",
+      "tags": [
+        "assistencia-tecnica",
+        "suporte-remoto",
+        "redes",
+        "mikrotik",
+        "desenvolvimento-de-software",
+        "branding",
+        "lencois-paulista",
+        "brasil"
+      ],
+      "capabilities": [
+        "AssistenciaTecnica",
+        "SuporteRemoto",
+        "RedesMikroTik",
+        "DesenvolvimentoDeSoftware",
+        "IdentidadeVisual"
+      ],
+      "representativeQueries": [
+        "assistência técnica de computador em Lençóis Paulista",
+        "quem configura rede MikroTik para empresa em São Paulo",
+        "empresa para desenvolver um site ou sistema sob medida",
+        "suporte de TI remoto para pequena empresa no Brasil",
+        "quanto custa formatar um notebook perto de mim"
+      ],
+      "version": "1.0.0",
+      "updatedAt": "2026-09-23T00:00:00Z",
+      "metadata": {
+        "language": [
+          "pt-BR",
+          "en",
+          "es",
+          "fr"
+        ],
+        "location": "Lençóis Paulista, SP, BR",
+        "contact": "https://wa.me/5514998040306",
+        "homepage": "https://www.innovatech.dev.br/"
+      }
+    },
+    {
+      "@context": "https://agenticresourcediscovery.org/context/v1",
+      "identifier": "urn:air:innovatech.dev.br:site:portfolio",
+      "displayName": "Innova Tech — Portfólio",
+      "type": "text/html",
+      "url": "https://www.innovatech.dev.br/portfolio",
+      "description": "Projetos entregues pela Innova Tech por nicho: sites institucionais e e-commerce, redes e infraestrutura MikroTik, sistemas sob medida e identidade visual.",
+      "tags": [
+        "portfolio",
+        "projetos",
+        "clientes",
+        "cases"
+      ],
+      "capabilities": [
+        "Portfolio"
+      ],
+      "representativeQueries": [
+        "exemplos de sites feitos pela Innova Tech",
+        "cases de projetos de rede e software da Innova Tech"
+      ],
+      "version": "1.0.0",
+      "updatedAt": "2026-09-23T00:00:00Z"
+    }
+  ]
 }

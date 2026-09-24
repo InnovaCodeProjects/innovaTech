@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import Icon from './Icon'
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import SectionLink from "./SectionLink";
@@ -34,7 +35,7 @@ export default function Footer() {
                 rel="noopener"
                 aria-label={t("footer.socialAria.instagram") as string}
               >
-                <i className="bi bi-instagram" />
+                <Icon name="instagram" />
               </a>
               <a
                 href="https://wa.me/5514998040306"
@@ -42,19 +43,19 @@ export default function Footer() {
                 rel="noopener"
                 aria-label={t("footer.socialAria.whatsapp") as string}
               >
-                <i className="bi bi-whatsapp" />
+                <Icon name="whatsapp" />
               </a>
               <a
                 href="mailto:innovatech.assistencia@gmail.com"
                 aria-label={t("footer.socialAria.email") as string}
               >
-                <i className="bi bi-envelope" />
+                <Icon name="envelope" />
               </a>
             </div>
           </div>
 
           <div className="fcol">
-            <h4>{t("footer.servicesHeading")}</h4>
+            <h3>{t("footer.servicesHeading")}</h3>
             <ul>
               {(t("footer.servicesItems", { returnObjects: true }) as string[]).map((item) => (
                 <li key={item}>
@@ -65,7 +66,7 @@ export default function Footer() {
           </div>
 
           <div className="fcol">
-            <h4>{t("footer.companyHeading")}</h4>
+            <h3>{t("footer.companyHeading")}</h3>
             <ul>
               <li>
                 <Link to="/portfolio">{t("footer.companyItems.projects")}</Link>
@@ -83,7 +84,7 @@ export default function Footer() {
           </div>
 
           <div className="fcol">
-            <h4>{t("footer.contactHeading")}</h4>
+            <h3>{t("footer.contactHeading")}</h3>
             <ul>
               <li>
                 <a
@@ -91,12 +92,12 @@ export default function Footer() {
                   target="_blank"
                   rel="noopener"
                 >
-                  <i className="bi bi-whatsapp" /> {t("footer.contactItems.whatsapp")}
+                  <Icon name="whatsapp" /> {t("footer.contactItems.whatsapp")}
                 </a>
               </li>
               <li>
                 <a href="mailto:innovatech.assistencia@gmail.com">
-                  <i className="bi bi-envelope" /> {t("footer.contactItems.email")}
+                  <Icon name="envelope" /> {t("footer.contactItems.email")}
                 </a>
               </li>
               <li>
@@ -105,7 +106,7 @@ export default function Footer() {
                   target="_blank"
                   rel="noopener"
                 >
-                  <i className="bi bi-instagram" /> {t("footer.contactItems.instagram")}
+                  <Icon name="instagram" /> {t("footer.contactItems.instagram")}
                 </a>
               </li>
             </ul>

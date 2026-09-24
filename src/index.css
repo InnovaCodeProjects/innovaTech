@@ -2,14 +2,13 @@
    INNOVA TECH — Design System 2026
    Merged: styles.css + signature.css + identity.css
    ============================================================ */
-@import "bootstrap-icons/font/bootstrap-icons.css";
-
-/* Override bundled font-display: block (causes FOIT and delays FCP) */
-@font-face {
-  font-display: swap;
-  font-family: "bootstrap-icons";
-  src: url("bootstrap-icons/font/fonts/bootstrap-icons.woff2?e34853135f9e39acf64315236852cd5a") format("woff2"),
-    url("bootstrap-icons/font/fonts/bootstrap-icons.woff?e34853135f9e39acf64315236852cd5a") format("woff");
+/* Inline SVG icons (see components/Icon.tsx) sized by the parent's font-size,
+   matching how the icon webfont they replaced used to behave. */
+.icn {
+  width: 1em;
+  height: 1em;
+  vertical-align: -0.125em;
+  flex-shrink: 0;
 }
 
 /* ---------- Theme tokens ---------- */
@@ -23,7 +22,7 @@
 
   --text: #ececf2;
   --text-2: #9a9aaa;
-  --text-3: #63636f;
+  --text-3: #8a8a99;
 
   --accent: #7c5cff;
   --accent-2: #4d86ff;
@@ -171,7 +170,7 @@ section {
   height: 18px;
   flex-shrink: 0;
 }
-.btn i {
+.btn .icn {
   font-size: 18px;
   flex-shrink: 0;
   line-height: 1;
@@ -427,7 +426,7 @@ section {
   border-radius: 10px;
   place-items: center;
 }
-.burger i {
+.burger .icn {
   font-size: 20px;
   line-height: 1;
 }
@@ -539,6 +538,11 @@ section {
   flex-direction: column;
   justify-content: center;
   scroll-snap-align: start;
+  /* The whole page is prerendered, so every section is in the DOM at first
+     paint. Skip layout for the ones off screen; min-height already reserves
+     their box, so nothing shifts. */
+  content-visibility: auto;
+  contain-intrinsic-size: auto 100vh;
 }
 
 /* ---------- Marquee / clients ---------- */
@@ -688,7 +692,7 @@ section {
   place-items: center;
   margin-bottom: 12px;
 }
-.flow-node .fi i {
+.flow-node .fi .icn {
   font-size: 24px;
   line-height: 1;
 }
@@ -956,7 +960,7 @@ section {
   width: 16px;
   height: 16px;
 }
-.pf-arrow i {
+.pf-arrow .icn {
   font-size: 16px;
   line-height: 1;
 }
@@ -1230,7 +1234,7 @@ section {
   font-size: 0.9rem;
   color: var(--text);
 }
-.price-banner i {
+.price-banner .icn {
   font-size: 17px;
   color: var(--accent);
   flex-shrink: 0;
@@ -1273,7 +1277,7 @@ section {
   justify-content: space-between;
   gap: 10px;
 }
-.price h4 {
+.price h3 {
   font-family: var(--font-display);
   font-weight: 600;
   font-size: 1rem;
@@ -1322,7 +1326,7 @@ section {
 .price-catalog-btn:hover {
   background: var(--accent-soft);
 }
-.price-catalog-btn i {
+.price-catalog-btn .icn {
   font-size: 15px;
   line-height: 1;
 }
@@ -1755,11 +1759,11 @@ section {
   width: 17px;
   height: 17px;
 }
-.socials a i {
+.socials a .icn {
   font-size: 17px;
   line-height: 1;
 }
-.fcol h4 {
+.fcol h3 {
   font-family: var(--font-mono);
   font-size: 0.72rem;
   letter-spacing: 0.16em;
@@ -1788,7 +1792,7 @@ section {
   width: 14px;
   height: 14px;
 }
-.fcol ul li a i {
+.fcol ul li a .icn {
   font-size: 14px;
   line-height: 1;
 }
@@ -1854,7 +1858,7 @@ section {
   width: 28px;
   height: 28px;
 }
-.fab i {
+.fab .icn {
   font-size: 28px;
   line-height: 1;
 }
@@ -2321,6 +2325,9 @@ section {
   justify-content: center;
 }
 
+/* Decorative watermark. Painted as a background rather than an <img> so it
+   isn't scored as the page's largest *contentful* element — it's aria-hidden
+   artwork at 5% opacity, not content. */
 .hero-mark {
   position: absolute;
   z-index: 1;
@@ -2329,7 +2336,7 @@ section {
   transform: translate(-50%, -50%);
   width: min(820px, 88vw);
   aspect-ratio: 1 / 1;
-  object-fit: contain;
+  background: url("/mark-white.png") center / contain no-repeat;
   opacity: 0.05;
   filter: grayscale(1) brightness(1.7);
   pointer-events: none;
@@ -2412,7 +2419,7 @@ section {
   width: 15px;
   height: 15px;
 }
-.hero-trust .tick i {
+.hero-trust .tick .icn {
   font-size: 14px;
   line-height: 1;
 }

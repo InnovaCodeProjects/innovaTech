@@ -2,18 +2,18 @@
 <html lang="pt-BR" data-theme="vector">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/png" href="/logo.png" />
+    <link rel="icon" type="image/png" sizes="96x96" href="/favicon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <!-- SEO Primary -->
-    <title>Innova Tech</title>
+    <title>Innova Tech — Tecnologia com propósito de inovação</title>
     <meta
       name="description"
-      content="Não somos só mais um T.I. Somos a ferramenta e a solução: assistência técnica, suporte remoto, redes MikroTik e desenvolvimento de software sob medida. Diagnóstico gratuito."
+      content="Assistência técnica, suporte remoto, redes MikroTik e desenvolvimento de software sob medida em Lençóis Paulista e região. Diagnóstico gratuito pelo WhatsApp."
     />
     <meta
       name="keywords"
-      content="suporte técnico, assistência técnica computadores, suporte remoto, redes MikroTik, desenvolvimento software, infraestrutura TI, formatação, manutenção notebook, innova tech"
+      content="suporte técnico, assistência técnica computadores, suporte remoto, redes MikroTik, desenvolvimento software, infraestrutura TI, formatação, manutenção notebook, innova tech, Lençóis Paulista"
     />
     <meta name="author" content="Innova Tech" />
     <meta name="robots" content="index, follow" />
@@ -26,27 +26,43 @@
     <meta property="og:type" content="website" />
     <meta
       property="og:title"
-      content="Innova Tech | Soluções Tecnológicas de Alto Nível"
+      content="Innova Tech — Tecnologia com propósito de inovação"
     />
     <meta
       property="og:description"
-      content="Suporte técnico, redes, infraestrutura e desenvolvimento de software. Diagnóstico gratuito. Inovando o amanhã, hoje."
+      content="Assistência técnica, suporte remoto, redes MikroTik e desenvolvimento de software sob medida. Diagnóstico gratuito pelo WhatsApp."
     />
-    <meta property="og:image" content="/og-image.png" />
-    <meta property="og:url" content="https://innovatech.com.br" />
+    <meta
+      property="og:image"
+      content="https://www.innovatech.dev.br/og-image.png"
+    />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta
+      property="og:image:alt"
+      content="Innova Tech — tecnologia com propósito de inovação"
+    />
+    <meta property="og:url" content="https://www.innovatech.dev.br/" />
     <meta property="og:locale" content="pt_BR" />
     <meta property="og:site_name" content="Innova Tech" />
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Innova Tech | Soluções Tecnológicas" />
+    <meta
+      name="twitter:title"
+      content="Innova Tech — Tecnologia com propósito de inovação"
+    />
     <meta
       name="twitter:description"
-      content="Suporte técnico, redes e desenvolvimento de software. Diagnóstico gratuito."
+      content="Assistência técnica, suporte remoto, redes MikroTik e desenvolvimento de software sob medida. Diagnóstico gratuito."
+    />
+    <meta
+      name="twitter:image"
+      content="https://www.innovatech.dev.br/og-image.png"
     />
 
     <!-- Canonical -->
-    <link rel="canonical" href="https://innovatech.com.br" />
+    <link rel="canonical" href="https://www.innovatech.dev.br/" />
 
     <!-- Sitemap -->
     <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
@@ -54,6 +70,9 @@
     <!-- Agentic Resource Discovery (ARD v0.91) -->
     <link rel="ard" href="/.well-known/ard.json" />
     <link rel="ai-catalog" href="/.well-known/ai-catalog.json" />
+
+    <!-- Hero watermark: fetched alongside the document, not after the CSS parses -->
+    <link rel="preload" as="image" href="/mark-white.png" fetchpriority="high" />
 
     <!-- Fonts (non-blocking: preload then swap to stylesheet) -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -81,11 +100,32 @@
       {
         "@context": "https://schema.org",
         "@type": "LocalBusiness",
+        "@id": "https://www.innovatech.dev.br/#business",
         "name": "Innova Tech",
-        "description": "Empresa de tecnologia especializada em suporte técnico, redes, infraestrutura e desenvolvimento de software.",
-        "url": "https://innovatech.com.br",
-        "logo": "https://innovatech.com.br/logo.png",
-        "address": { "@type": "PostalAddress", "addressCountry": "BR" },
+        "description": "Empresa de tecnologia especializada em assistência técnica, suporte remoto, redes e infraestrutura MikroTik e desenvolvimento de software sob medida.",
+        "url": "https://www.innovatech.dev.br/",
+        "logo": "https://www.innovatech.dev.br/logo.png",
+        "image": "https://www.innovatech.dev.br/og-image.png",
+        "telephone": "+5514998040306",
+        "priceRange": "$$",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Lençóis Paulista",
+          "addressRegion": "SP",
+          "addressCountry": "BR"
+        },
+        "areaServed": [
+          { "@type": "City", "name": "Lençóis Paulista" },
+          { "@type": "State", "name": "São Paulo" },
+          { "@type": "Country", "name": "Brasil" }
+        ],
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "contactType": "customer service",
+          "telephone": "+5514998040306",
+          "availableLanguage": ["pt-BR", "en", "es", "fr"]
+        },
+        "sameAs": ["https://wa.me/5514998040306"],
         "hasOfferCatalog": {
           "@type": "OfferCatalog",
           "name": "Serviços de TI",
@@ -113,6 +153,13 @@
               "itemOffered": {
                 "@type": "Service",
                 "name": "Desenvolvimento de Software"
+              }
+            },
+            {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Service",
+                "name": "Identidade Visual e Branding"
               }
             }
           ]
